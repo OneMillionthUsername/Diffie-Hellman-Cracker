@@ -27,7 +27,7 @@
         <TextBox x:Name="ausgabeTopR" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ausgabeTop1R" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ausgabeBottomR" HorizontalAlignment="Left" Height="20" Margin="480,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="480,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="480,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True"/>
 
         <!--Name rechts-->
         <TextBlock x:Name="privateKeyA" HorizontalAlignment="Left" Height="20" Margin="580,40,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
@@ -59,6 +59,8 @@
 
         <Button x:Name="BtnClear" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="BtnCopy" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ZeitAusgabe" HorizontalAlignment="Left" Height="20" Margin="640,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right"/>
+        <TextBlock x:Name="Zeit" HorizontalAlignment="Left" Height="20" Margin="740,160,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
 
     </Grid>
 </Window>

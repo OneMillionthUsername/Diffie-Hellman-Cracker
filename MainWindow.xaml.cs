@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 using Math.Gmp.Native;
 
 namespace WpfApp1
@@ -53,12 +54,20 @@ namespace WpfApp1
 			gmp_lib.mpz_init(sharedSecretKeyAlice);
 			gmp_lib.mpz_init(sharedSecretKeyBob);
 
+			Stopwatch stopwatch = new Stopwatch();
+
+			if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
+				|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
+			{
+				CopyPublicData();
+			}
 			modulo = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
 			ExchangeKeyAlice = exchangeKeyAinput.Text;
 			ExchangeKeyBob = exchangeKeyBinput.Text;
 
 			int i = 0;
+			stopwatch.Start();
 			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0)
 			{
 				versuche++;
@@ -87,11 +96,14 @@ namespace WpfApp1
 			gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
 			gmp_lib.mpz_pow_ui(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob);
 			gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
+			long time = stopwatch.ElapsedMilliseconds;
+			stopwatch.Stop();
 
 			ausgabeTopR.Text = secretKeyAlice.ToString();
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = versuche.ToString();
+			ZeitAusgabe.Text = time.ToString() + " ms";
 		}
 
 		private void BtnCreateKey(object sender, RoutedEventArgs e)
@@ -103,12 +115,11 @@ namespace WpfApp1
 			mpz_t exchangeKeyAlice = new mpz_t();
 			mpz_t exchangeKeyBob = new mpz_t();
 			gmp_randstate_t rnd = new gmp_randstate_t();
-			uint seed = int.MaxValue/2;
+			uint seed = int.MaxValue;
 
 			//init
 			gmp_lib.gmp_randinit_default(rnd);
 			gmp_lib.gmp_randseed_ui(rnd, seed);
-
 			gmp_lib.mpz_init(privateKeyAlice);
 			gmp_lib.mpz_init(privateKeyBob);
 			gmp_lib.mpz_init(exchangeKeyAlice);
@@ -124,8 +135,8 @@ namespace WpfApp1
 			uint basis = gmp_lib.gmp_urandomb_ui(rnd, 8);
 
 			//erstelle private Schlüssel
-			uint alicePrivate = gmp_lib.gmp_urandomb_ui(rnd, 8);
-			uint bobPrivate = gmp_lib.gmp_urandomb_ui(rnd, 8);
+			uint alicePrivate = gmp_lib.gmp_urandomb_ui(rnd, 16);
+			uint bobPrivate = gmp_lib.gmp_urandomb_ui(rnd, 16);
 			gmp_lib.gmp_randclear(rnd);
 
 			//erstelle exchange key für Alice
@@ -175,10 +186,15 @@ namespace WpfApp1
 
 		private void BtnCopyClick(object sender, RoutedEventArgs e)
 		{
-			publicKeyAinput.Text = publicAliceCopy;
-			publicKeyBinput.Text = publicBobCopy;
-			exchangeKeyAinput.Text = exchangeAliceCopy;
-			exchangeKeyBinput.Text = exchangeBobCopy;
+			CopyPublicData();
+		}
+
+		private void CopyPublicData()
+		{
+			publicKeyAinput.Text = generateAlicePublic.Text;
+			publicKeyBinput.Text = generateBobPublic.Text;
+			exchangeKeyAinput.Text = exchangeKeyAlice.Text;
+			exchangeKeyBinput.Text = exchangeKeyBob.Text;
 		}
 	}
 }
