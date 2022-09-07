@@ -5,54 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Diffie-Hellman-Cracker" Height="450" Width="800">
     <Grid Background="AliceBlue">
         <!--Namen links-->
-        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
-        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
-        <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="30,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
-        <TextBlock x:Name="exchangeKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
+        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
+        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="110,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
 
         <!--Input links-->
-        <TextBox x:Name="publicKeyAinput" HorizontalAlignment="Left" Height="20" Margin="160,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="publicKeyBinput" HorizontalAlignment="Left" Height="20" Margin="160,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="exchangeKeyAinput" HorizontalAlignment="Left" Height="20" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="exchangeKeyBinput" HorizontalAlignment="Left" Height="20" Margin="160,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="publicKeyAinput" HorizontalAlignment="Left" Height="20" Margin="240,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="publicKeyBinput" HorizontalAlignment="Left" Height="20" Margin="240,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="exchangeKeyAinput" HorizontalAlignment="Left" Height="20" Margin="240,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="exchangeKeyBinput" HorizontalAlignment="Left" Height="20" Margin="240,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
 
         <!--Button-->
-        <Button x:Name="button_crackKey" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="280,40,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button x:Name="button_createKey" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="280,80,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="button_crackKey" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="360,40,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="button_createKey" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="360,80,0,0" VerticalAlignment="Top" Width="80"/>
 
         <!--Output rechts-->
-        <TextBox x:Name="ausgabeTopR" HorizontalAlignment="Left" Height="20" Margin="400,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeTop1R" HorizontalAlignment="Left" Height="20" Margin="400,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeBottomR" HorizontalAlignment="Left" Height="20" Margin="400,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="400,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeTopR" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeTop1R" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeBottomR" HorizontalAlignment="Left" Height="20" Margin="480,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="480,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
 
         <!--Name rechts-->
-        <TextBlock x:Name="privateKeyA" HorizontalAlignment="Left" Height="20" Margin="500,40,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="privteKeyB" HorizontalAlignment="Left" Height="20" Margin="500,80,0,0" TextWrapping="Wrap" Text="Private Key Bob" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="secretSharedKey" HorizontalAlignment="Left" Height="20" Margin="500,120,0,0" TextWrapping="Wrap" Text="Shared secret key" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="versuche" HorizontalAlignment="Left" Height="20" Margin="500,160,0,0" TextWrapping="Wrap" Text="Versuche" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="privateKeyA" HorizontalAlignment="Left" Height="20" Margin="580,40,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="privteKeyB" HorizontalAlignment="Left" Height="20" Margin="580,80,0,0" TextWrapping="Wrap" Text="Private Key Bob" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="secretSharedKey" HorizontalAlignment="Left" Height="20" Margin="580,120,0,0" TextWrapping="Wrap" Text="Shared secret key" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="versuche" HorizontalAlignment="Left" Height="20" Margin="580,160,0,0" TextWrapping="Wrap" Text="Versuche" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
 
         <!--Output Generated-->
-        <TextBox x:Name="generateAlicePublic" HorizontalAlignment="Left" Height="20" Margin="160,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="generateBobPublic" HorizontalAlignment="Left" Height="20" Margin="160,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="exchangeKeyAlice" HorizontalAlignment="Left" Height="20" Margin="160,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="exchangeKeyBob" HorizontalAlignment="Left" Height="20" Margin="160,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="160,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
-        <TextBlock x:Name="publicKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
-        <TextBlock x:Name="publicKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
-        <TextBlock x:Name="exchangeKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="30,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
-        <TextBlock x:Name="exchangeKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
-        <TextBox x:Name="generateAlicePrivate" HorizontalAlignment="Left" Height="20" Margin="260,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="generateBobPrivate" HorizontalAlignment="Left" Height="20" Margin="260,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="sharedSecretKeyAliceBox" HorizontalAlignment="Left" Height="20" Margin="260,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="sharedSecretKeyBobBox" HorizontalAlignment="Left" Height="20" Margin="260,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBlock x:Name="privateKeyA_Copy" HorizontalAlignment="Left" Height="20" Margin="360,220,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="privteKeyB_Copy" HorizontalAlignment="Left" Height="20" Margin="360,260,0,0" TextWrapping="Wrap" Text="Private Key Bob" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="secretSharedKey_Copy" HorizontalAlignment="Left" Height="20" Margin="360,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" Alice"/></TextBlock>
-        <TextBlock x:Name="secretSharedKey_Copy1" HorizontalAlignment="Left" Height="20" Margin="360,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" "/><Run Text="Bob"/></TextBlock>
+        <TextBox x:Name="generateAlicePublic" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generateBobPublic" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="exchangeKeyAlice" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="exchangeKeyBob" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="360,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
+        <TextBlock x:Name="publicKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="150,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
+        <TextBlock x:Name="publicKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="150,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="140,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="150,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
+
+        <TextBox x:Name="generateAlicePrivate" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,220,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generateBobPrivate" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,260,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="sharedSecretKeyAliceBox" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,300,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="sharedSecretKeyBobBox" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,340,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+
+        <TextBlock x:Name="privateKeyA_Copy" HorizontalAlignment="Left" Height="20" Margin="550,220,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="privteKeyB_Copy" HorizontalAlignment="Left" Height="20" Margin="550,260,0,0" TextWrapping="Wrap" Text="Private Key Bob" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
+        <TextBlock x:Name="secretSharedKey_Copy" HorizontalAlignment="Left" Height="20" Margin="550,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" Alice"/></TextBlock>
+        <TextBlock x:Name="secretSharedKey_Copy1" HorizontalAlignment="Left" Height="20" Margin="550,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" "/><Run Text="Bob"/></TextBlock>
+
+        <Button x:Name="BtnClear" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="BtnCopy" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
 </Window>
