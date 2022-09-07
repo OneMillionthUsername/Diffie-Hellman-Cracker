@@ -26,6 +26,7 @@ namespace WpfApp1
 		public string publicBobCopy { get; set; }
 		public string exchangeAliceCopy { get; set; }
 		public string exchangeBobCopy { get; set; }
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -47,8 +48,6 @@ namespace WpfApp1
 			gmp_lib.mpz_init(result);
 			gmp_lib.mpz_init(modulo);
 			gmp_lib.mpz_init(basis);
-			gmp_lib.mpz_init(ExchangeKeyAlice);
-			gmp_lib.mpz_init(ExchangeKeyBob);
 			gmp_lib.mpz_init(ExchangeKeyAlice);
 			gmp_lib.mpz_init(ExchangeKeyBob);
 			gmp_lib.mpz_init(sharedSecretKeyAlice);
@@ -104,10 +103,15 @@ namespace WpfApp1
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = versuche.ToString();
 			ZeitAusgabe.Text = time.ToString() + " ms";
+			//gmp_lib.mpz_clears(result, sharedSecretKeyAlice, sharedSecretKeyBob, modulo, basis, ExchangeKeyAlice, ExchangeKeyBob);
 		}
 
 		private void BtnCreateKey(object sender, RoutedEventArgs e)
 		{
+			mpz_t modulo = new mpz_t();
+			mpz_t basis = new mpz_t();
+			mpz_t alicePrivate = new mpz_t();
+			mpz_t bobPrivate = new mpz_t();
 			mpz_t privateKeyAlice = new mpz_t();
 			mpz_t privateKeyBob = new mpz_t();
 			mpz_t sharedSecretKeyAlice = new mpz_t();
@@ -115,45 +119,48 @@ namespace WpfApp1
 			mpz_t exchangeKeyAlice = new mpz_t();
 			mpz_t exchangeKeyBob = new mpz_t();
 			gmp_randstate_t rnd = new gmp_randstate_t();
-			uint seed = int.MaxValue;
+			gmp_lib.gmp_randinit_mt(rnd);
+
+			gmp_lib.gmp_randseed_ui(rnd, 100000U);
 
 			//init
-			gmp_lib.gmp_randinit_default(rnd);
-			gmp_lib.gmp_randseed_ui(rnd, seed);
+			gmp_lib.mpz_init(alicePrivate);
+			gmp_lib.mpz_init(bobPrivate);
+			gmp_lib.mpz_init(modulo);
+			gmp_lib.mpz_init(basis);
 			gmp_lib.mpz_init(privateKeyAlice);
 			gmp_lib.mpz_init(privateKeyBob);
 			gmp_lib.mpz_init(exchangeKeyAlice);
 			gmp_lib.mpz_init(exchangeKeyBob);
-			gmp_lib.mpz_init(exchangeKeyAlice);
-			gmp_lib.mpz_init(exchangeKeyBob);
 			gmp_lib.mpz_init(sharedSecretKeyAlice);
 			gmp_lib.mpz_init(sharedSecretKeyBob);
-			//clear random state
 
 			//erstelle öffentlichen Handshake
-			uint modulo = gmp_lib.gmp_urandomb_ui(rnd, 32);
-			uint basis = gmp_lib.gmp_urandomb_ui(rnd, 8);
+			gmp_lib.mpz_urandomb(modulo, rnd, 32);
+			gmp_lib.mpz_urandomb(basis, rnd, 8);
 
 			//erstelle private Schlüssel
-			uint alicePrivate = gmp_lib.gmp_urandomb_ui(rnd, 16);
-			uint bobPrivate = gmp_lib.gmp_urandomb_ui(rnd, 16);
-			gmp_lib.gmp_randclear(rnd);
+			gmp_lib.mpz_urandomb(alicePrivate, rnd, 16);
+			gmp_lib.mpz_urandomb(bobPrivate, rnd, 16);
+
+			uint alice_privat = gmp_lib.mpz_get_ui(alicePrivate);
+			uint bob_privat = gmp_lib.mpz_get_ui(bobPrivate);
 
 			//erstelle exchange key für Alice
-			gmp_lib.mpz_ui_pow_ui(exchangeKeyAlice, basis, alicePrivate);
-			gmp_lib.mpz_mod_ui(exchangeKeyAlice, exchangeKeyAlice, modulo);			
+			gmp_lib.mpz_pow_ui(exchangeKeyAlice, basis, alice_privat);
+			gmp_lib.mpz_mod(exchangeKeyAlice, exchangeKeyAlice, modulo);
 
 			//erstelle exchange key für Bob
-			gmp_lib.mpz_ui_pow_ui(exchangeKeyBob, basis, bobPrivate);
-			gmp_lib.mpz_mod_ui(exchangeKeyBob, exchangeKeyBob, modulo);
+			gmp_lib.mpz_pow_ui(exchangeKeyBob, basis, bob_privat);
+			gmp_lib.mpz_mod(exchangeKeyBob, exchangeKeyBob, modulo);
 
 			//erstelle den secret shared Schlüssel
-			gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, exchangeKeyBob, alicePrivate);
-			gmp_lib.mpz_mod_ui(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
+			gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, exchangeKeyBob, alice_privat);
+			gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
+			gmp_lib.mpz_pow_ui(sharedSecretKeyBob, exchangeKeyAlice, bob_privat);
+			gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
 
-			gmp_lib.mpz_pow_ui(sharedSecretKeyBob, exchangeKeyAlice, bobPrivate);
-			gmp_lib.mpz_mod_ui(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
-
+			//output
 			publicAliceCopy = generateAlicePublic.Text = modulo.ToString();
 			publicBobCopy = generateBobPublic.Text = basis.ToString();
 			generateAlicePrivate.Text = alicePrivate.ToString();
@@ -162,6 +169,10 @@ namespace WpfApp1
 			exchangeBobCopy = this.exchangeKeyBob.Text = exchangeKeyBob.ToString();
 			sharedSecretKeyAliceBox.Text = sharedSecretKeyAlice.ToString();
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
+
+			//clear random states and vars
+			gmp_lib.gmp_randclear(rnd);
+			//gmp_lib.mpz_clears(modulo, basis, alicePrivate, bobPrivate, privateKeyAlice, exchangeKeyBob, exchangeKeyAlice, exchangeKeyBob, sharedSecretKeyAlice, sharedSecretKeyBob);
 		}
 
 		private void BtnClearKey(object sender, RoutedEventArgs e)
@@ -182,6 +193,7 @@ namespace WpfApp1
 			exchangeKeyBob.Clear();
 			sharedSecretKeyAliceBox.Clear();
 			sharedSecretKeyBobBox.Clear();
+			ZeitAusgabe.Clear();
 		}
 
 		private void BtnCopyClick(object sender, RoutedEventArgs e)
