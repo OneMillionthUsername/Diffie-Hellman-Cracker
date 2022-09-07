@@ -7,23 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="61,40,0,0" TextWrapping="Wrap" Text="Public key A" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.476,0.871"/>
-        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="61,80,0,0" TextWrapping="Wrap" Text="Public Key B" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.476,0.871"></TextBlock>
-        <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="51,120,0,0" TextWrapping="Wrap" Text="Exchange Key A" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.476,0.871"></TextBlock>
-        <TextBlock x:Name="exchangeKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="51,160,0,0" TextWrapping="Wrap" Text="Exchange Key B" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.476,0.871"/>
+        <!--Namen links-->
+        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
+        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public Key Bob"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="30,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange Key Alice"/></TextBlock>
+        <TextBlock x:Name="exchangeKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="40,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange Key Bob"/></TextBlock>
         
+        <!--Input links-->
         <TextBox x:Name="publicKeyAinput" HorizontalAlignment="Left" Height="20" Margin="160,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="publicKeyBinput" HorizontalAlignment="Left" Height="20" Margin="160,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="exchangeKeyAinput" HorizontalAlignment="Left" Height="20" Margin="160,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="exchangeKeyBinput" HorizontalAlignment="Left" Height="20" Margin="160,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         
+        <!--Button-->
         <Button x:Name="button_crackKey" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="280,40,0,0" VerticalAlignment="Top" Width="80"/>
         
+        <!--Input rechts-->
         <TextBox x:Name="ausgabeTopR" HorizontalAlignment="Left" Height="20" Margin="400,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ausgabeTop1R" HorizontalAlignment="Left" Height="20" Margin="400,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ausgabeBottomR" HorizontalAlignment="Left" Height="20" Margin="400,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="400,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
         
+        <!--Name rechts-->
         <TextBlock x:Name="privateKeyA" HorizontalAlignment="Left" Height="20" Margin="500,40,0,0" TextWrapping="Wrap" Text="Private key A" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.476,0.871"/>
         <TextBlock x:Name="privteKeyB" HorizontalAlignment="Left" Height="20" Margin="500,80,0,0" TextWrapping="Wrap" Text="Private Key B" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.476,0.871"/>
         <TextBlock x:Name="secretSharedKey" HorizontalAlignment="Left" Height="20" Margin="500,120,0,0" TextWrapping="Wrap" Text="Secret shared Key" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
