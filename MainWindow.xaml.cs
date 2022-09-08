@@ -27,9 +27,13 @@ namespace WpfApp1
 		public string exchangeAliceCopy { get; set; }
 		public string exchangeBobCopy { get; set; }
 
+		gmp_randstate_t rnd = new gmp_randstate_t();
 		public MainWindow()
 		{
 			InitializeComponent();
+			gmp_lib.gmp_randinit_mt(rnd);
+			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
+			gmp_lib.gmp_randclear(rnd);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
@@ -126,11 +130,8 @@ namespace WpfApp1
 			mpz_t sharedSecretKeyBob = new mpz_t();
 			mpz_t exchangeKeyAlice = new mpz_t();
 			mpz_t exchangeKeyBob = new mpz_t();
-			gmp_randstate_t rnd = new gmp_randstate_t();
 
 			//init random
-			gmp_lib.gmp_randinit_mt(rnd);
-			gmp_lib.gmp_randseed_ui(rnd, 100000U);
 
 			//init
 			gmp_lib.mpz_init(alicePrivate);
@@ -171,7 +172,6 @@ namespace WpfApp1
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
 
 			//clear random state
-			gmp_lib.gmp_randclear(rnd);
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
