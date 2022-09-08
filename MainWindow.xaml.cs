@@ -33,6 +33,9 @@ namespace WpfApp1
 			InitializeComponent();
 			gmp_lib.gmp_randinit_mt(rnd);
 			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
+		}
+		~MainWindow()
+		{
 			gmp_lib.gmp_randclear(rnd);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
