@@ -34,12 +34,12 @@ namespace WpfApp1
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
 			//uint secretKeyAlice = 0;
-			//uint exponent = 0;
+			uint exponent = 0;
 			//uint secretKeyBob = 0;
 			ulong versuche = 0;
 			mpz_t secretKeyBob = new mpz_t();
 			mpz_t secretKeyAlice = new mpz_t();
-			mpz_t exponent = new mpz_t();
+			//mpz_t exponent = new mpz_t();
 			mpz_t result = new mpz_t();
 			mpz_t sharedSecretKeyAlice = new mpz_t();
 			mpz_t sharedSecretKeyBob = new mpz_t();
@@ -50,7 +50,7 @@ namespace WpfApp1
 			//init
 			gmp_lib.mpz_init(secretKeyAlice);
 			gmp_lib.mpz_init(secretKeyBob);
-			gmp_lib.mpz_init(exponent);
+			//gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_init(result);
 			gmp_lib.mpz_init(modulo);
 			gmp_lib.mpz_init(basis);
@@ -84,30 +84,23 @@ namespace WpfApp1
 
 			int i = 0;
 			stopwatch.Start();
-			while (gmp_lib.mpz_cmp(modulo, exponent) >= 0)
+			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0)
 			{
 				versuche++;
-				//exponent++;
-				gmp_lib.mpz_add_ui(exponent, exponent, 1);
+				exponent++;
 				
 				//gmp_lib.mpz_pow_ui(result, basis, exponent);
 				//gmp_lib.mpz_mod(result, result, modulo);
-				gmp_lib.mpz_powm(result, basis, exponent, modulo);
+				gmp_lib.mpz_powm_ui(result, basis, exponent, modulo);
 
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0)
 				{
-					mpz_t temp = new mpz_t();
-					gmp_lib.mpz_init(temp);
-					temp = exponent;
-					secretKeyAlice = temp;
+					gmp_lib.mpz_init_set_ui(secretKeyAlice, exponent);
 					i++;
 				}
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyBob) == 0)
 				{
-					mpz_t temp = new mpz_t();
-					gmp_lib.mpz_init(temp);
-					temp = exponent;
-					secretKeyBob = temp;
+					gmp_lib.mpz_init_set_ui(secretKeyBob, exponent);
 					i++;
 				}
 				if (i >= 2)
@@ -214,7 +207,6 @@ namespace WpfApp1
 			gmp_lib.gmp_randclear(rnd);
 			//gmp_lib.mpz_clears(modulo, basis, alicePrivate, bobPrivate, privateKeyAlice, exchangeKeyBob, exchangeKeyAlice, exchangeKeyBob, sharedSecretKeyAlice, sharedSecretKeyBob);
 		}
-
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
 			publicKeyAinput.Clear();
@@ -235,7 +227,6 @@ namespace WpfApp1
 			sharedSecretKeyBobBox.Clear();
 			ZeitAusgabe.Clear();
 		}
-
 		private void BtnCopyClick(object sender, RoutedEventArgs e)
 		{
 			CopyPublicData();
