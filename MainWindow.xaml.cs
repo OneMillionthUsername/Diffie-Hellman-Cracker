@@ -211,7 +211,6 @@ namespace WpfApp1
 			sharedSecretKeyAliceBox.Text = sharedSecretKeyAlice.ToString();
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
 
-			//clear random state
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
