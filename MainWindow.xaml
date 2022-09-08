@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Diffie-Hellman-Cracker" Height="450" Width="800">
+    
     <Grid Background="AliceBlue">
         <!--Namen links-->
         <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
@@ -24,9 +25,9 @@
         <Button x:Name="button_createKey" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="360,80,0,0" VerticalAlignment="Top" Width="80"/>
 
         <!--Output rechts-->
-        <TextBox x:Name="ausgabeTopR" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeTop1R" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="ausgabeBottomR" HorizontalAlignment="Left" Height="20" Margin="480,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="ausgabeTopR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="ausgabeTop1R" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="ausgabeBottomR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black"/>
         <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="480,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True"/>
 
         <!--Name rechts-->

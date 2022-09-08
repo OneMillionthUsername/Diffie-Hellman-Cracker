@@ -33,10 +33,13 @@ namespace WpfApp1
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
-			uint secretKeyAlice = 0;
-			uint secretKeyBob = 0;
+			//uint secretKeyAlice = 0;
+			//uint exponent = 0;
+			//uint secretKeyBob = 0;
 			ulong versuche = 0;
-			uint exponent = 0;
+			mpz_t secretKeyBob = new mpz_t();
+			mpz_t secretKeyAlice = new mpz_t();
+			mpz_t exponent = new mpz_t();
 			mpz_t result = new mpz_t();
 			mpz_t sharedSecretKeyAlice = new mpz_t();
 			mpz_t sharedSecretKeyBob = new mpz_t();
@@ -45,6 +48,9 @@ namespace WpfApp1
 			mpz_t ExchangeKeyAlice = new mpz_t();
 			mpz_t ExchangeKeyBob = new mpz_t();
 			//init
+			gmp_lib.mpz_init(secretKeyAlice);
+			gmp_lib.mpz_init(secretKeyBob);
+			gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_init(result);
 			gmp_lib.mpz_init(modulo);
 			gmp_lib.mpz_init(basis);
@@ -60,30 +66,49 @@ namespace WpfApp1
 			{
 				CopyPublicData();
 			}
+
 			modulo = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
 			ExchangeKeyAlice = exchangeKeyAinput.Text;
 			ExchangeKeyBob = exchangeKeyBinput.Text;
 
+			//set default values if input is empty
+			//if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
+			//	|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
+			//{
+			//	publicKeyAinput.Text = 10.ToString();
+			//	publicKeyBinput.Text = 10.ToString();
+			//	exchangeKeyAinput.Text = 10.ToString();
+			//	exchangeKeyBinput.Text = 10.ToString();
+			//}
+
 			int i = 0;
 			stopwatch.Start();
-			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0)
+			while (gmp_lib.mpz_cmp(modulo, exponent) >= 0)
 			{
 				versuche++;
-				exponent++;
-				gmp_lib.mpz_pow_ui(result, basis, exponent);
-				gmp_lib.mpz_mod(result, result, modulo);
-
+				//exponent++;
+				gmp_lib.mpz_add_ui(exponent, exponent, 1);
 				
+				//gmp_lib.mpz_pow_ui(result, basis, exponent);
+				//gmp_lib.mpz_mod(result, result, modulo);
+				gmp_lib.mpz_powm(result, basis, exponent, modulo);
+
 				//Modulo vom Result rechnen!
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0)
 				{
-					secretKeyAlice = exponent;
+					mpz_t temp = new mpz_t();
+					gmp_lib.mpz_init(temp);
+					temp = exponent;
+					secretKeyAlice = temp;
 					i++;
 				}
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyBob) == 0)
 				{
-					secretKeyBob = exponent;
+					mpz_t temp = new mpz_t();
+					gmp_lib.mpz_init(temp);
+					temp = exponent;
+					secretKeyBob = temp;
 					i++;
 				}
 				if (i >= 2)
@@ -91,10 +116,16 @@ namespace WpfApp1
 					break;
 				}
 			}
-			gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice);
-			gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
-			gmp_lib.mpz_pow_ui(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob);
-			gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
+			//gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice);
+			//gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
+
+			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice, modulo);
+
+			//gmp_lib.mpz_pow_ui(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob);
+			//gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
+
+			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob, modulo);
+
 			long time = stopwatch.ElapsedMilliseconds;
 			stopwatch.Stop();
 
@@ -143,22 +174,32 @@ namespace WpfApp1
 			gmp_lib.mpz_urandomb(alicePrivate, rnd, 16);
 			gmp_lib.mpz_urandomb(bobPrivate, rnd, 16);
 
-			uint alice_privat = gmp_lib.mpz_get_ui(alicePrivate);
-			uint bob_privat = gmp_lib.mpz_get_ui(bobPrivate);
+			//uint alice_privat = gmp_lib.mpz_get_ui(alicePrivate);
+			//uint bob_privat = gmp_lib.mpz_get_ui(bobPrivate);
 
 			//erstelle exchange key für Alice
-			gmp_lib.mpz_pow_ui(exchangeKeyAlice, basis, alice_privat);
-			gmp_lib.mpz_mod(exchangeKeyAlice, exchangeKeyAlice, modulo);
+			//gmp_lib.mpz_pow_ui(exchangeKeyAlice, basis, alice_privat);
+			//gmp_lib.mpz_mod(exchangeKeyAlice, exchangeKeyAlice, modulo);
+
+			gmp_lib.mpz_powm(exchangeKeyAlice, basis, alicePrivate, modulo);
 
 			//erstelle exchange key für Bob
-			gmp_lib.mpz_pow_ui(exchangeKeyBob, basis, bob_privat);
-			gmp_lib.mpz_mod(exchangeKeyBob, exchangeKeyBob, modulo);
+			//gmp_lib.mpz_pow_ui(exchangeKeyBob, basis, bob_privat);
+			//gmp_lib.mpz_mod(exchangeKeyBob, exchangeKeyBob, modulo);
+
+			gmp_lib.mpz_powm(exchangeKeyBob, basis, bobPrivate, modulo);
 
 			//erstelle den secret shared Schlüssel
-			gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, exchangeKeyBob, alice_privat);
-			gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
-			gmp_lib.mpz_pow_ui(sharedSecretKeyBob, exchangeKeyAlice, bob_privat);
-			gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
+			//gmp_lib.mpz_pow_ui(sharedSecretKeyAlice, exchangeKeyBob, alice_privat);
+			//gmp_lib.mpz_mod(sharedSecretKeyAlice, sharedSecretKeyAlice, modulo);
+
+			gmp_lib.mpz_powm(sharedSecretKeyAlice, exchangeKeyBob, alicePrivate, modulo);
+
+			//gmp_lib.mpz_pow_ui(sharedSecretKeyBob, exchangeKeyAlice, bob_privat);
+			//gmp_lib.mpz_mod(sharedSecretKeyBob, sharedSecretKeyBob, modulo);
+
+			gmp_lib.mpz_powm(sharedSecretKeyBob, exchangeKeyAlice, bobPrivate, modulo);
+
 
 			//output
 			publicAliceCopy = generateAlicePublic.Text = modulo.ToString();
@@ -200,7 +241,6 @@ namespace WpfApp1
 		{
 			CopyPublicData();
 		}
-
 		private void CopyPublicData()
 		{
 			publicKeyAinput.Text = generateAlicePublic.Text;
