@@ -37,10 +37,10 @@
         <TextBlock x:Name="versuche" HorizontalAlignment="Left" Height="20" Margin="580,160,0,0" TextWrapping="Wrap" Text="Versuche" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
 
         <!--Output Generated-->
-        <TextBox x:Name="generateAlicePublic" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
-        <TextBox x:Name="generateBobPublic" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
-        <TextBox x:Name="exchangeKeyAlice" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
-        <TextBox x:Name="exchangeKeyBob" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generatePublicKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generatePublicKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generateExchangeKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
+        <TextBox x:Name="generateExchangeKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black"/>
 
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="360,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
         <TextBlock x:Name="publicKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="150,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
