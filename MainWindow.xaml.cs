@@ -27,12 +27,44 @@ namespace WpfApp1
 		public string exchangeAliceCopy { get; set; }
 		public string exchangeBobCopy { get; set; }
 
+		List<TextBox> inputBoxes = new List<TextBox>();
+		List<TextBox> generatedBoxes = new List<TextBox>();
+		List<TextBox> allBoxes = new List<TextBox>();
+
 		gmp_randstate_t rnd = new gmp_randstate_t();
 		public MainWindow()
 		{
 			InitializeComponent();
 			gmp_lib.gmp_randinit_mt(rnd);
 			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
+
+			inputBoxes.Add(publicKeyAinput);
+			inputBoxes.Add(publicKeyBinput);
+			inputBoxes.Add(exchangeKeyAinput);
+			inputBoxes.Add(exchangeKeyBinput);
+
+			generatedBoxes.Add(generatePublicKeyAinput);
+			generatedBoxes.Add(generatePublicKeyBinput);
+			generatedBoxes.Add(generateExchangeKeyAinput);
+			generatedBoxes.Add(generateExchangeKeyBinput);
+
+			allBoxes.Add(publicKeyAinput);
+			allBoxes.Add(publicKeyBinput);
+			allBoxes.Add(exchangeKeyAinput);
+			allBoxes.Add(exchangeKeyBinput);
+			allBoxes.Add(ausgabeTopR);
+			allBoxes.Add(ausgabeTop1R);
+			allBoxes.Add(ausgabeBottomR);
+			allBoxes.Add(ausgabeBottomR1);
+			allBoxes.Add(generatePublicKeyAinput);
+			allBoxes.Add(generatePublicKeyBinput);
+			allBoxes.Add(generateAlicePrivate);
+			allBoxes.Add(generateBobPrivate);
+			allBoxes.Add(generateExchangeKeyAinput);
+			allBoxes.Add(generateExchangeKeyBinput);
+			allBoxes.Add(sharedSecretKeyAliceBox);
+			allBoxes.Add(sharedSecretKeyBobBox);
+			allBoxes.Add(ZeitAusgabe);
 		}
 		~MainWindow()
 		{
@@ -40,6 +72,27 @@ namespace WpfApp1
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
+
+			if (generateAlicePrivate.Text.Length > 0)
+			{
+				CopyPublicData();
+			}
+			foreach (var item in inputBoxes)
+			{
+				if (item.Text.Length <= 0)
+				{
+					item.Background = Brushes.OrangeRed;
+					if (inputBoxes.IndexOf(item) == inputBoxes.Count - 1)
+					{
+						return;
+					}
+				}
+				else
+				{
+					item.Background = Brushes.White;
+				}
+			}
+
 			uint exponent = 0;
 			ulong versuche = 0;
 			mpz_t secretKeyBob = new mpz_t();
@@ -64,26 +117,12 @@ namespace WpfApp1
 
 			Stopwatch stopwatch = new Stopwatch();
 
-			if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
-				|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
-			{
-				CopyPublicData();
-			}
-
 			modulo = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
 			ExchangeKeyAlice = exchangeKeyAinput.Text;
 			ExchangeKeyBob = exchangeKeyBinput.Text;
 
 			//set default values if input is empty
-			//if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
-			//	|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
-			//{
-			//	publicKeyAinput.Text = 10.ToString();
-			//	publicKeyBinput.Text = 10.ToString();
-			//	exchangeKeyAinput.Text = 10.ToString();
-			//	exchangeKeyBinput.Text = 10.ToString();
-			//}
 
 			int i = 0;
 			stopwatch.Start();
@@ -134,8 +173,6 @@ namespace WpfApp1
 			mpz_t exchangeKeyAlice = new mpz_t();
 			mpz_t exchangeKeyBob = new mpz_t();
 
-			//init random
-
 			//init
 			gmp_lib.mpz_init(alicePrivate);
 			gmp_lib.mpz_init(bobPrivate);
@@ -178,34 +215,35 @@ namespace WpfApp1
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
-			publicKeyAinput.Clear();
-			publicKeyBinput.Clear();
-			exchangeKeyAinput.Clear();
-			exchangeKeyBinput.Clear();
-			ausgabeTopR.Clear();
-			ausgabeTop1R.Clear();
-			ausgabeBottomR.Clear();
-			ausgabeBottomR1.Clear();
-			generatePublicKeyAinput.Clear();
-			generatePublicKeyBinput.Clear();
-			generateAlicePrivate.Clear();
-			generateBobPrivate.Clear();
-			generateExchangeKeyAinput.Clear();
-			generateExchangeKeyBinput.Clear();
-			sharedSecretKeyAliceBox.Clear();
-			sharedSecretKeyBobBox.Clear();
-			ZeitAusgabe.Clear();
+			foreach (var item in allBoxes)
+			{
+				item.Clear();
+			}
+			foreach (var item in inputBoxes)
+			{
+				item.Background = Brushes.White;
+			}
 		}
 		private void BtnCopyClick(object sender, RoutedEventArgs e)
 		{
+			if (generatedBoxes[0].Text.Length > 0)
+			{
+				foreach (var item in inputBoxes)
+				{
+					item.Background = Brushes.White;
+				}
+			}
 			CopyPublicData();
 		}
 		private void CopyPublicData()
 		{
-			publicKeyAinput.Text = generatePublicKeyAinput.Text;
-			publicKeyBinput.Text = generatePublicKeyBinput.Text;
-			exchangeKeyAinput.Text = generateExchangeKeyAinput.Text;
-			exchangeKeyBinput.Text = generateExchangeKeyBinput.Text;
+			if (generatedBoxes[0].Text.Length > 0)
+			{
+				for (int i = 0; i < generatedBoxes.Count; i++)
+				{
+					inputBoxes[i].Text = generatedBoxes[i].Text;
+				}
+			}
 		}
 	}
 }
