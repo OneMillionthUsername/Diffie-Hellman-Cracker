@@ -94,7 +94,6 @@ namespace WpfApp1
 				//gmp_lib.mpz_mod(result, result, modulo);
 				gmp_lib.mpz_powm(result, basis, exponent, modulo);
 
-				//Modulo vom Result rechnen!
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0)
 				{
 					mpz_t temp = new mpz_t();
