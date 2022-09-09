@@ -75,7 +75,7 @@ namespace WpfApp1
 
 			if (generateAlicePrivate.Text.Length > 0)
 			{
-				CopyPublicData();
+				CopyGeneratedData();
 			}
 			foreach (var item in inputBoxes)
 			{
@@ -228,7 +228,7 @@ namespace WpfApp1
 					item.Background = Brushes.White;
 				}
 			}
-			CopyPublicData();
+			CopyGeneratedData();
 		}
 		private void CopyGeneratedData()
 		{
