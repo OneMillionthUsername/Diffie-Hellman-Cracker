@@ -31,13 +31,41 @@ namespace WpfApp1
 		List<TextBox> generatedBoxes = new List<TextBox>();
 		List<TextBox> allBoxes = new List<TextBox>();
 
-		gmp_randstate_t rnd = new gmp_randstate_t();
+		private ulong Versuche = 0;
+		private uint exponent = 0;
+		private gmp_randstate_t rnd = new gmp_randstate_t();
+		private mpz_t modulo = new mpz_t();
+		private mpz_t basis = new mpz_t();
+		private mpz_t alicePrivate = new mpz_t();
+		private mpz_t bobPrivate = new mpz_t();
+		private mpz_t sharedSecretKeyAlice = new mpz_t();
+		private mpz_t sharedSecretKeyBob = new mpz_t();
+		private mpz_t ExchangeKeyAlice = new mpz_t();
+		private mpz_t ExchangeKeyBob = new mpz_t();
+		private mpz_t secretKeyBob = new mpz_t();
+		private mpz_t secretKeyAlice = new mpz_t();
+		private mpz_t result = new mpz_t();
+		private Stopwatch stopwatch = new Stopwatch();
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			#region INIT VARS
 			gmp_lib.gmp_randinit_mt(rnd);
 			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
-
+			gmp_lib.mpz_init(alicePrivate);
+			gmp_lib.mpz_init(bobPrivate);
+			gmp_lib.mpz_init(modulo);
+			gmp_lib.mpz_init(basis);
+			gmp_lib.mpz_init(ExchangeKeyAlice);
+			gmp_lib.mpz_init(ExchangeKeyBob);
+			gmp_lib.mpz_init(sharedSecretKeyAlice);
+			gmp_lib.mpz_init(sharedSecretKeyBob);
+			gmp_lib.mpz_init(secretKeyAlice);
+			gmp_lib.mpz_init(secretKeyBob);
+			gmp_lib.mpz_init(result);
+			#endregion
+			#region FILL LISTS
 			inputBoxes.Add(publicKeyAinput);
 			inputBoxes.Add(publicKeyBinput);
 			inputBoxes.Add(exchangeKeyAinput);
@@ -64,16 +92,29 @@ namespace WpfApp1
 			allBoxes.Add(generateExchangeKeyBinput);
 			allBoxes.Add(sharedSecretKeyAliceBox);
 			allBoxes.Add(sharedSecretKeyBobBox);
-			allBoxes.Add(ZeitAusgabe);
+			allBoxes.Add(ZeitAusgabe); 
+			#endregion
 		}
 		~MainWindow()
 		{
 			gmp_lib.gmp_randclear(rnd);
+			gmp_lib.mpz_clears(modulo, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
+			gmp_lib.mpz_init(result);
+			gmp_lib.mpz_init(modulo);
+			gmp_lib.mpz_init(basis);
+			gmp_lib.mpz_init(ExchangeKeyAlice);
+			gmp_lib.mpz_init(ExchangeKeyBob);
+			gmp_lib.mpz_init(sharedSecretKeyAlice);
+			gmp_lib.mpz_init(sharedSecretKeyBob);
+			gmp_lib.mpz_init(secretKeyAlice);
+			gmp_lib.mpz_init(secretKeyBob);
+
 			CheckInput checkInput = CheckInputInt;
 			checkInput += CheckInputPrime;
+			checkInput += CheckInputEmpty;
 			foreach (CheckInput item in checkInput.GetInvocationList())
 			{
 				if (item.Invoke())
@@ -85,13 +126,19 @@ namespace WpfApp1
 					return;
 				}
 			}
-			checkInput();
 
+			/////////
+			if(CheckInputPrime(basis, modulo))
+			{
+
+			}
+
+			/////////
 			if (!string.IsNullOrWhiteSpace(generateAlicePrivate.Text))
 			{
 				CopyGeneratedData();
 			}
-			foreach (var item in inputBoxes)
+			foreach (TextBox item in inputBoxes)
 			{
 				if (item.Text.Length <= 0)
 				{
@@ -107,42 +154,17 @@ namespace WpfApp1
 				}
 			}
 
-			uint exponent = 0;
-			ulong versuche = 0;
-			mpz_t secretKeyBob = new mpz_t();
-			mpz_t secretKeyAlice = new mpz_t();
-			mpz_t result = new mpz_t();
-			mpz_t sharedSecretKeyAlice = new mpz_t();
-			mpz_t sharedSecretKeyBob = new mpz_t();
-			mpz_t modulo = new mpz_t();
-			mpz_t basis = new mpz_t();
-			mpz_t ExchangeKeyAlice = new mpz_t();
-			mpz_t ExchangeKeyBob = new mpz_t();
-			//init
-			gmp_lib.mpz_init(secretKeyAlice);
-			gmp_lib.mpz_init(secretKeyBob);
-			gmp_lib.mpz_init(result);
-			gmp_lib.mpz_init(modulo);
-			gmp_lib.mpz_init(basis);
-			gmp_lib.mpz_init(ExchangeKeyAlice);
-			gmp_lib.mpz_init(ExchangeKeyBob);
-			gmp_lib.mpz_init(sharedSecretKeyAlice);
-			gmp_lib.mpz_init(sharedSecretKeyBob);
-
-			Stopwatch stopwatch = new Stopwatch();
-
+			//set default values if input is empty
 			modulo = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
 			ExchangeKeyAlice = exchangeKeyAinput.Text;
 			ExchangeKeyBob = exchangeKeyBinput.Text;
 
-			//set default values if input is empty
-
 			int i = 0;
 			stopwatch.Start();
 			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0)
 			{
-				versuche++;
+				Versuche++;
 				exponent++;
 
 				gmp_lib.mpz_powm_ui(result, basis, exponent, modulo);
@@ -171,32 +193,28 @@ namespace WpfApp1
 			ausgabeTopR.Text = secretKeyAlice.ToString();
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
-			ausgabeBottomR1.Text = versuche.ToString();
+			ausgabeBottomR1.Text = Versuche.ToString();
 			ZeitAusgabe.Text = time.ToString() + " ms";
 		}
+
+		private bool CheckInputEmpty()
+		{
+			int errors = 0;
+			foreach (TextBox item in inputBoxes)
+			{
+				if (string.IsNullOrWhiteSpace(item.Text) || !item.Text.All(char.IsDigit))
+				{
+					errors++;
+					item.Background = Brushes.Red;
+					item.Text = "#VALUE?";
+				}
+			}
+			return errors <= 0;
+		}
+
 		private void BtnCreateKey(object sender, RoutedEventArgs e)
 		{
-			mpz_t modulo = new mpz_t();
-			mpz_t basis = new mpz_t();
-			mpz_t alicePrivate = new mpz_t();
-			mpz_t bobPrivate = new mpz_t();
-			mpz_t sharedSecretKeyAlice = new mpz_t();
-			mpz_t sharedSecretKeyBob = new mpz_t();
-			mpz_t exchangeKeyAlice = new mpz_t();
-			mpz_t exchangeKeyBob = new mpz_t();
-
-			//init
-			gmp_lib.mpz_init(alicePrivate);
-			gmp_lib.mpz_init(bobPrivate);
-			gmp_lib.mpz_init(modulo);
-			gmp_lib.mpz_init(basis);
-			gmp_lib.mpz_init(exchangeKeyAlice);
-			gmp_lib.mpz_init(exchangeKeyBob);
-			gmp_lib.mpz_init(sharedSecretKeyAlice);
-			gmp_lib.mpz_init(sharedSecretKeyBob);
-
 			//erstelle öffentlichen Handshake
-
 			gmp_lib.mpz_urandomb(modulo, rnd, BitStandard);
 			generatePublicKeyAinput.Text = modulo.ToString();
 			do
@@ -205,7 +223,6 @@ namespace WpfApp1
 				generatePublicKeyBinput.Text = basis.ToString();
 			} while (!CheckInputPrime(basis, modulo));
 
-
 			//erstelle privaten Schlüssel
 			gmp_lib.mpz_urandomb(alicePrivate, rnd, 16);
 			generateAlicePrivate.Text = alicePrivate.ToString();
@@ -213,24 +230,24 @@ namespace WpfApp1
 			generateBobPrivate.Text = bobPrivate.ToString();
 
 			//erstelle exchange keys
-			gmp_lib.mpz_powm(exchangeKeyAlice, basis, alicePrivate, modulo);
-			generateExchangeKeyAinput.Text = exchangeKeyAlice.ToString();
-			gmp_lib.mpz_powm(exchangeKeyBob, basis, bobPrivate, modulo);
-			generateExchangeKeyBinput.Text = exchangeKeyBob.ToString();
+			gmp_lib.mpz_powm(ExchangeKeyAlice, basis, alicePrivate, modulo);
+			generateExchangeKeyAinput.Text = ExchangeKeyAlice.ToString();
+			gmp_lib.mpz_powm(ExchangeKeyBob, basis, bobPrivate, modulo);
+			generateExchangeKeyBinput.Text = ExchangeKeyBob.ToString();
 
 			//erstelle die secret shared Schlüssel
-			gmp_lib.mpz_powm(sharedSecretKeyAlice, exchangeKeyBob, alicePrivate, modulo);
+			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, alicePrivate, modulo);
 			sharedSecretKeyAliceBox.Text = sharedSecretKeyAlice.ToString();
-			gmp_lib.mpz_powm(sharedSecretKeyBob, exchangeKeyAlice, bobPrivate, modulo);
+			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, bobPrivate, modulo);
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
-			foreach (var item in allBoxes)
+			foreach (TextBox item in allBoxes)
 			{
 				item.Clear();
 			}
-			foreach (var item in inputBoxes)
+			foreach (TextBox item in inputBoxes)
 			{
 				item.Background = Brushes.White;
 			}
@@ -259,7 +276,7 @@ namespace WpfApp1
 		private bool CheckInputInt()
 		{
 			int errors = 0;
-			foreach (var item in inputBoxes)
+			foreach (TextBox item in inputBoxes)
 			{
 				if (string.IsNullOrWhiteSpace(item.Text) || !item.Text.All(char.IsDigit))
 				{
@@ -268,26 +285,18 @@ namespace WpfApp1
 					item.Text = "#VALUE?";
 				}
 			}
-			if (errors > 0)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			return errors <= 0;
 		}
 		private bool CheckInputPrime()
 		{
 			mpz_t var = new mpz_t();
 			gmp_lib.mpz_init(var);
 
-			char_ptr str = new char_ptr(inputBoxes[1].Text);
+			char_ptr str = new char_ptr(inputBoxes[1].Text); 
 			gmp_lib.mpz_init_set_str(var, str, 10);
 			if (gmp_lib.mpz_probab_prime_p(var, 25) != 2)
 			{
 				inputBoxes[1].Background = Brushes.Red;
-				inputBoxes[1].Text = "#PRIME?";
 				return false;
 			}
 			else
@@ -308,7 +317,7 @@ namespace WpfApp1
 
 			gmp_lib.mpz_init(modulo);
 			gmp_lib.mpz_init_set_str(prime, str, 10);
-			if(gmp_lib.mpz_divisible_p(prime, multipleOfPrime) > 0)
+			if (gmp_lib.mpz_divisible_p(prime, multipleOfPrime) > 0)
 			{
 				inputBoxes[1].Background = Brushes.Red;
 				return false;
