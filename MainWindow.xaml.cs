@@ -22,8 +22,8 @@ namespace WpfApp1
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(64);
-		public mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(32);
+		public mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
+		public mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(16);
 
 		public delegate bool CheckInput();
 
@@ -176,7 +176,6 @@ namespace WpfApp1
 		}
 		private void BtnCreateKey(object sender, RoutedEventArgs e)
 		{
-			bool validHandshake = true;
 			mpz_t modulo = new mpz_t();
 			mpz_t basis = new mpz_t();
 			mpz_t alicePrivate = new mpz_t();
