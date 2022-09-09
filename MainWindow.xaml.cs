@@ -22,10 +22,8 @@ namespace WpfApp1
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public string publicAliceCopy { get; set; }
-		public string publicBobCopy { get; set; }
-		public string exchangeAliceCopy { get; set; }
-		public string exchangeBobCopy { get; set; }
+		public mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(64);
+		public mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(32);
 
 		public delegate bool CheckInput();
 
@@ -178,6 +176,7 @@ namespace WpfApp1
 		}
 		private void BtnCreateKey(object sender, RoutedEventArgs e)
 		{
+			bool validHandshake = true;
 			mpz_t modulo = new mpz_t();
 			mpz_t basis = new mpz_t();
 			mpz_t alicePrivate = new mpz_t();
@@ -198,31 +197,33 @@ namespace WpfApp1
 			gmp_lib.mpz_init(sharedSecretKeyBob);
 
 			//erstelle öffentlichen Handshake
-			gmp_lib.mpz_urandomb(modulo, rnd, 32);
-			gmp_lib.mpz_urandomb(basis, rnd, 8);
+
+			gmp_lib.mpz_urandomb(modulo, rnd, BitStandard);
+			generatePublicKeyAinput.Text = modulo.ToString();
+			do
+			{
+				gmp_lib.mpz_urandomb(basis, rnd, BitStandardPrime);
+				generatePublicKeyBinput.Text = basis.ToString();
+			} while (!CheckInputPrime(basis, modulo));
+
 
 			//erstelle privaten Schlüssel
 			gmp_lib.mpz_urandomb(alicePrivate, rnd, 16);
+			generateAlicePrivate.Text = alicePrivate.ToString();
 			gmp_lib.mpz_urandomb(bobPrivate, rnd, 16);
+			generateBobPrivate.Text = bobPrivate.ToString();
 
 			//erstelle exchange keys
 			gmp_lib.mpz_powm(exchangeKeyAlice, basis, alicePrivate, modulo);
+			generateExchangeKeyAinput.Text = exchangeKeyAlice.ToString();
 			gmp_lib.mpz_powm(exchangeKeyBob, basis, bobPrivate, modulo);
+			generateExchangeKeyBinput.Text = exchangeKeyBob.ToString();
 
 			//erstelle die secret shared Schlüssel
 			gmp_lib.mpz_powm(sharedSecretKeyAlice, exchangeKeyBob, alicePrivate, modulo);
-			gmp_lib.mpz_powm(sharedSecretKeyBob, exchangeKeyAlice, bobPrivate, modulo);
-
-			//output
-			publicAliceCopy = generatePublicKeyAinput.Text = modulo.ToString();
-			publicBobCopy = generatePublicKeyBinput.Text = basis.ToString();
-			generateAlicePrivate.Text = alicePrivate.ToString();
-			generateBobPrivate.Text = bobPrivate.ToString();
-			exchangeAliceCopy = generateExchangeKeyAinput.Text = exchangeKeyAlice.ToString();
-			exchangeBobCopy = generateExchangeKeyBinput.Text = exchangeKeyBob.ToString();
 			sharedSecretKeyAliceBox.Text = sharedSecretKeyAlice.ToString();
+			gmp_lib.mpz_powm(sharedSecretKeyBob, exchangeKeyAlice, bobPrivate, modulo);
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
-
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e)
 		{
@@ -288,6 +289,29 @@ namespace WpfApp1
 			{
 				inputBoxes[1].Background = Brushes.Red;
 				inputBoxes[1].Text = "#PRIME?";
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		private bool CheckInputPrime(mpz_t prime, mpz_t multipleOfPrime)
+		{
+			mpz_t modulo = new mpz_t();
+			char_ptr str = new char_ptr(generatedBoxes[1].Text);
+
+			if (gmp_lib.mpz_probab_prime_p(prime, 25) != 2)
+			{
+				inputBoxes[1].Background = Brushes.Red;
+				return false;
+			}
+
+			gmp_lib.mpz_init(modulo);
+			gmp_lib.mpz_init_set_str(prime, str, 10);
+			if(gmp_lib.mpz_divisible_p(prime, multipleOfPrime) > 0)
+			{
+				inputBoxes[1].Background = Brushes.Red;
 				return false;
 			}
 			else
