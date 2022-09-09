@@ -40,6 +40,16 @@ namespace WpfApp1
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
+			if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
+					|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
+			{
+				if (generatePublicKeyAinput.Text.Length <= 0)
+				{
+					//Farbe ändern.
+				}
+				CopyGeneratedData();
+			}
+
 			uint exponent = 0;
 			ulong versuche = 0;
 			mpz_t secretKeyBob = new mpz_t();
@@ -64,11 +74,7 @@ namespace WpfApp1
 
 			Stopwatch stopwatch = new Stopwatch();
 
-			if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
-				|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
-			{
-				CopyPublicData();
-			}
+
 
 			modulo = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
@@ -76,14 +82,6 @@ namespace WpfApp1
 			ExchangeKeyBob = exchangeKeyBinput.Text;
 
 			//set default values if input is empty
-			//if (publicKeyAinput.Text.Length <= 0 || publicKeyBinput.Text.Length <= 0
-			//	|| exchangeKeyAinput.Text.Length <= 0 || exchangeKeyBinput.Text.Length <= 0)
-			//{
-			//	publicKeyAinput.Text = 10.ToString();
-			//	publicKeyBinput.Text = 10.ToString();
-			//	exchangeKeyAinput.Text = 10.ToString();
-			//	exchangeKeyBinput.Text = 10.ToString();
-			//}
 
 			int i = 0;
 			stopwatch.Start();
@@ -127,8 +125,6 @@ namespace WpfApp1
 			mpz_t basis = new mpz_t();
 			mpz_t alicePrivate = new mpz_t();
 			mpz_t bobPrivate = new mpz_t();
-			mpz_t privateKeyAlice = new mpz_t();
-			mpz_t privateKeyBob = new mpz_t();
 			mpz_t sharedSecretKeyAlice = new mpz_t();
 			mpz_t sharedSecretKeyBob = new mpz_t();
 			mpz_t exchangeKeyAlice = new mpz_t();
@@ -141,8 +137,6 @@ namespace WpfApp1
 			gmp_lib.mpz_init(bobPrivate);
 			gmp_lib.mpz_init(modulo);
 			gmp_lib.mpz_init(basis);
-			gmp_lib.mpz_init(privateKeyAlice);
-			gmp_lib.mpz_init(privateKeyBob);
 			gmp_lib.mpz_init(exchangeKeyAlice);
 			gmp_lib.mpz_init(exchangeKeyBob);
 			gmp_lib.mpz_init(sharedSecretKeyAlice);
@@ -198,9 +192,9 @@ namespace WpfApp1
 		}
 		private void BtnCopyClick(object sender, RoutedEventArgs e)
 		{
-			CopyPublicData();
+			CopyGeneratedData();
 		}
-		private void CopyPublicData()
+		private void CopyGeneratedData()
 		{
 			publicKeyAinput.Text = generatePublicKeyAinput.Text;
 			publicKeyBinput.Text = generatePublicKeyBinput.Text;
