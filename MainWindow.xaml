@@ -21,8 +21,10 @@
         <TextBox x:Name="exchangeKeyBinput" HorizontalAlignment="Left" Height="20" Margin="240,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
 
         <!--Button-->
-        <Button x:Name="button_crackKey" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="360,40,0,0" VerticalAlignment="Top" Width="80" ToolTip="Try to brute force attack/crack the secret keys."/>
-        <Button x:Name="button_createKey" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="360,80,0,0" VerticalAlignment="Top" Width="80" ToolTip="Creates random generated values for testing"/>
+        <Button x:Name="button_crackKey" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="360,40,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="button_createKey" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="360,80,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="BtnClear" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="BtnCopy" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80"/>
 
         <!--Output rechts-->
         <TextBox x:Name="ausgabeTopR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black"/>
@@ -58,8 +60,8 @@
         <TextBlock x:Name="secretSharedKey_Copy" HorizontalAlignment="Left" Height="20" Margin="550,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" Alice"/></TextBlock>
         <TextBlock x:Name="secretSharedKey_Copy1" HorizontalAlignment="Left" Height="20" Margin="550,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" "/><Run Text="Bob"/></TextBlock>
 
-        <Button x:Name="BtnClear" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80" ToolTip="Clears all values"/>
-        <Button x:Name="BtnCopy" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80" ToolTip="Copies the random generated values for testing"/>
+        <Button x:Name="BtnClear" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="BtnCopy" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="ZeitAusgabe" HorizontalAlignment="Left" Height="20" Margin="640,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right"/>
         <TextBlock x:Name="Zeit" HorizontalAlignment="Left" Height="20" Margin="740,160,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
 
