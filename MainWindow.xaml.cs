@@ -27,6 +27,8 @@ namespace WpfApp1
 		public string exchangeAliceCopy { get; set; }
 		public string exchangeBobCopy { get; set; }
 
+		public delegate bool CheckInput();
+
 		List<TextBox> inputBoxes = new List<TextBox>();
 		List<TextBox> generatedBoxes = new List<TextBox>();
 		List<TextBox> allBoxes = new List<TextBox>();
@@ -72,8 +74,22 @@ namespace WpfApp1
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e)
 		{
+			CheckInput checkInput = CheckInputInt;
+			checkInput += CheckInputPrime;
+			foreach (CheckInput item in checkInput.GetInvocationList())
+			{
+				if (item.Invoke())
+				{
+					continue;
+				}
+				else
+				{
+					return;
+				}
+			}
+			checkInput();
 
-			if (generateAlicePrivate.Text.Length > 0)
+			if (!string.IsNullOrWhiteSpace(generateAlicePrivate.Text))
 			{
 				CopyGeneratedData();
 			}
@@ -238,6 +254,45 @@ namespace WpfApp1
 				{
 					inputBoxes[i].Text = generatedBoxes[i].Text;
 				}
+			}
+		}
+		private bool CheckInputInt()
+		{
+			int errors = 0;
+			foreach (var item in inputBoxes)
+			{
+				if (string.IsNullOrWhiteSpace(item.Text) || !item.Text.All(char.IsDigit))
+				{
+					errors++;
+					item.Background = Brushes.Red;
+					item.Text = "#VALUE?";
+				}
+			}
+			if (errors > 0)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		private bool CheckInputPrime()
+		{
+			mpz_t var = new mpz_t();
+			gmp_lib.mpz_init(var);
+
+			char_ptr str = new char_ptr(inputBoxes[1].Text);
+			gmp_lib.mpz_init_set_str(var, str, 10);
+			if (gmp_lib.mpz_probab_prime_p(var, 25) != 2)
+			{
+				inputBoxes[1].Background = Brushes.Red;
+				inputBoxes[1].Text = "#PRIME?";
+				return false;
+			}
+			else
+			{
+				return true;
 			}
 		}
 	}
