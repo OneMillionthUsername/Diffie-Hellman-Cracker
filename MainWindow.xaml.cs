@@ -245,5 +245,9 @@ namespace Deffi_Hellman_Cracker {
 		private void OptEncProtocol_Click(object sender, RoutedEventArgs e) {
 
 		}
+
+		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
+			throw new NotImplementedException();
+		}
 	}
 }
