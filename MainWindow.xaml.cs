@@ -108,24 +108,6 @@ namespace WpfApp1 {
 				}
 			}
 
-			//wenn es etwas zum kopieren gibt und die inputbox leer ist, kopiere.
-			//if (!string.IsNullOrWhiteSpace(generateAlicePrivate.Text) && string.IsNullOrWhiteSpace(inputBoxes[0].Text)) {
-			//	CopyGeneratedData();
-			//}
-
-			//prüfen ob jede Box ausgefüllt ist
-			foreach (TextBox item in inputBoxes) {
-				if (string.IsNullOrWhiteSpace(item.Text)) {
-					item.Background = Brushes.OrangeRed;
-					if (inputBoxes.IndexOf(item) == inputBoxes.Count - 1) {
-						return;
-					}
-				}
-				else {
-					item.Background = Brushes.White;
-				}
-			}
-
 			int i = 0;
 			Versuche = 0;
 			exponent = 0;
@@ -162,26 +144,20 @@ namespace WpfApp1 {
 		}
 
 		private bool SetValues() {
-			//set default values if input is empty
-			int error = 0;
-			//bevorzuge imer Wert aus input
+			//bevorzuge immer Wert aus input
 			if (modulo.ToString() != publicKeyAinput.Text) {
 				modulo = publicKeyAinput.Text;
-				error++;
 			}
 			if (basis.ToString() != publicKeyBinput.Text) {
 				basis = publicKeyBinput.Text;
-				error++;
 			}
 			if (ExchangeKeyAlice.ToString() != exchangeKeyAinput.Text) {
 				ExchangeKeyAlice = exchangeKeyAinput.Text;
-				error++;
 			}
 			if (ExchangeKeyBob.ToString() != exchangeKeyBinput.Text) {
 				ExchangeKeyBob = exchangeKeyBinput.Text;
-				error++;
 			}
-			return error == 0 || error == 4;
+			return true;
 		}
 
 		private void BtnCreateKey(object sender, RoutedEventArgs e) {
@@ -230,9 +206,13 @@ namespace WpfApp1 {
 			}
 		}
 		private void CopyGeneratedData() {
-			if (generatedBoxes[0].Text.Length > 0 && generatedBoxes[0].Text != inputBoxes[0].Text) {
-				for (int i = 0; i < generatedBoxes.Count; i++) {
-					inputBoxes[i].Text = generatedBoxes[i].Text;
+			int i = 0;
+			if (generatedBoxes[0].Text.Length > 0) {
+				foreach (TextBox item in inputBoxes) {
+					if (item.Text != generatedBoxes[i].Text) {
+						item.Text = generatedBoxes[i].Text;
+					}
+					i++;
 				}
 			}
 		}
