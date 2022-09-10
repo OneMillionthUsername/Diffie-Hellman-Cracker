@@ -11,11 +11,11 @@
         <!--#region MENU -->
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="File" HorizontalAlignment="Left">
-                    <MenuItem Header="Open" Click="OptFileOpen_Click"/>
+                <MenuItem Header="_File" HorizontalAlignment="Left">
+                    <MenuItem Header="_Open" Click="OptFileOpen_Click"/>
                 </MenuItem>
-                <MenuItem Header="Options" HorizontalAlignment="Left" VerticalContentAlignment="Top">
-                    <MenuItem Header="Encryption protocol" Click="OptEncProtocol_Click" HorizontalAlignment="Left" VerticalAlignment="Top"></MenuItem>
+                <MenuItem Header="_Options" HorizontalAlignment="Left" VerticalContentAlignment="Top">
+                    <MenuItem Header="_Encryption protocol" Click="OptEncProtocol_Click" HorizontalAlignment="Left" VerticalAlignment="Top"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
