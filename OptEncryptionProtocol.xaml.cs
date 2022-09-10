@@ -41,25 +41,25 @@ namespace Diffie_Hellman_Crack {
 		private void Key_length_128_Selected(object sender, RoutedEventArgs e) {
 			MainWindow.BitStandard = 128;
 		}
-		private void Prme_Key_length_8_Selected(object sender, RoutedEventArgs e) {
-			MainWindow.BitStandard = 8;
+		private void Prime_Key_length_8_Selected(object sender, RoutedEventArgs e) {
+			MainWindow.BitStandardPrime = 8;
 		}
 
-		private void Prme_Key_length_16_Selected(object sender, RoutedEventArgs e) {
-			MainWindow.BitStandard = 16;
+		private void Prime_Key_length_16_Selected(object sender, RoutedEventArgs e) {
+			MainWindow.BitStandardPrime = 16;
 		}
 
 
-		private void Prme_Key_length_32_Selected(object sender, RoutedEventArgs e) {
-			MainWindow.BitStandard = 32;
+		private void Prime_Key_length_32_Selected(object sender, RoutedEventArgs e) {
+			MainWindow.BitStandardPrime = 32;
 		}
 
-		private void Prme_Key_length_64_Selected(object sender, RoutedEventArgs e) {
-			MainWindow.BitStandard = 64;
+		private void Prime_Key_length_64_Selected(object sender, RoutedEventArgs e) {
+			MainWindow.BitStandardPrime = 64;
 		}
 
-		private void Prme_Key_length_128_Selected(object sender, RoutedEventArgs e) {
-			MainWindow.BitStandard = 128;
+		private void Prime_Key_length_128_Selected(object sender, RoutedEventArgs e) {
+			MainWindow.BitStandardPrime = 128;
 		}
 	}
 }

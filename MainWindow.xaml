@@ -9,7 +9,7 @@
 
     <Grid Background="AliceBlue">
         <!--#region MENU -->
-        <DockPanel>
+        <DockPanel Margin="0,-1,0,1">
             <Menu DockPanel.Dock="Left" FlowDirection="LeftToRight">
                 <MenuItem Header="_File" HorizontalAlignment="Left" FlowDirection="RightToLeft">
                     <MenuItem Header="_Open" Click="OptFileOpen_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
@@ -51,10 +51,10 @@
         <TextBox x:Name="ausgabeTop1R" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ausgabeBottomR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ausgabeBottomR1" HorizontalAlignment="Left" Height="20" Margin="480,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateAlicePrivate" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,220,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateBobPrivate" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,260,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="sharedSecretKeyAliceBox" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,300,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="sharedSecretKeyBobBox" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,340,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateAlicePrivate" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="420,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateBobPrivate" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="420,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="sharedSecretKeyAliceBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="420,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="sharedSecretKeyBobBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="420,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ZeitAusgabe" HorizontalAlignment="Left" Height="20" Margin="640,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <!--#endregion-->
 

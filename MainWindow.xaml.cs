@@ -108,7 +108,7 @@ namespace Diffie_Hellman_Crack {
 			}
 			int i = 0;
 			Versuche = 0;
-			exponent = 0;
+			exponent = 1;
 			stopwatch.Start();
 			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0) {
 				Versuche++;
@@ -159,9 +159,9 @@ namespace Diffie_Hellman_Crack {
 			generatePublicKeyBinput.Text = basis.ToString();
 
 			//erstelle privaten Schlüssel
-			gmp_lib.mpz_urandomb(alicePrivate, rnd, 16);
+			gmp_lib.mpz_urandomb(alicePrivate, rnd, BitStandardPrime);
 			generateAlicePrivate.Text = alicePrivate.ToString();
-			gmp_lib.mpz_urandomb(bobPrivate, rnd, 16);
+			gmp_lib.mpz_urandomb(bobPrivate, rnd, BitStandardPrime);
 			generateBobPrivate.Text = bobPrivate.ToString();
 
 			//erstelle exchange keys

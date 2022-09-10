@@ -20,11 +20,11 @@
         <TextBox x:Name="Verschluesselungs_Key_Laenge" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,14,0,0" Text="Verschlüsselungs Key Länge" TextWrapping="Wrap" VerticalAlignment="Top"
                  Width="165" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False"/>
         <ComboBox x:Name="comboBox_Copy" Text="Keys" HorizontalAlignment="Left" Height="20" Margin="200,64,0,0" VerticalAlignment="Top" Width="80">
-            <ComboBoxItem x:Name="Key_length_1" Selected="Prme_Key_length_8_Selected" Content="8 bit"/>
-            <ComboBoxItem x:Name="Key_length_2" Selected="Prme_Key_length_16_Selected" Content="16 bit"/>
-            <ComboBoxItem x:Name="Key_length_3" Selected="Prme_Key_length_32_Selected" Content="32 bit"/>
-            <ComboBoxItem x:Name="Key_length_4" Selected="Prme_Key_length_64_Selected" Content="64 bit"/>
-            <ComboBoxItem x:Name="Key_length_5" Selected="Prme_Key_length_128_Selected" Content="128 bit"/>
+            <ComboBoxItem x:Name="Key_length_1" Selected="Prime_Key_length_8_Selected" Content="8 bit"/>
+            <ComboBoxItem x:Name="Key_length_2" Selected="Prime_Key_length_16_Selected" Content="16 bit"/>
+            <ComboBoxItem x:Name="Key_length_3" Selected="Prime_Key_length_32_Selected" Content="32 bit"/>
+            <ComboBoxItem x:Name="Key_length_4" Selected="Prime_Key_length_64_Selected" Content="64 bit"/>
+            <ComboBoxItem x:Name="Key_length_5" Selected="Prime_Key_length_128_Selected" Content="128 bit"/>
         </ComboBox>
         <TextBox x:Name="Primzahl_Key_Laenge" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,64,0,0" Text="Primzahl Key Länge" TextWrapping="Wrap" VerticalAlignment="Top"
             Width="165" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False"/>
