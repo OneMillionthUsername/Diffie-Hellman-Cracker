@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Deffi_Hellman_Cracker {
+namespace Diffie_Hellman_Crack {
 	/// <summary>
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
@@ -243,11 +243,11 @@ namespace Deffi_Hellman_Cracker {
 			result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
 		}
 		private void OptEncProtocol_Click(object sender, RoutedEventArgs e) {
-			
+			OptEncryptionProtocol opt = new OptEncryptionProtocol();
+			opt.Show();
 		}
-
 		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
-			throw new NotImplementedException();
+
 		}
 	}
 }

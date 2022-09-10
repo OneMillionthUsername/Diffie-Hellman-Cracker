@@ -1,21 +1,21 @@
-﻿<Window x:Class="Deffi_Hellman_Cracker.MainWindow"
+﻿<Window x:Class="Diffie_Hellman_Crack.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Deffi_Hellman_Cracker"
+        xmlns:local="clr-namespace:Diffie_Hellman_Crack"
         mc:Ignorable="d"
         Title="Diffie-Hellman-Cracker" Height="450" Width="800">
 
     <Grid Background="AliceBlue">
         <!--#region MENU -->
         <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File" HorizontalAlignment="Left">
-                    <MenuItem Header="_Open" Click="OptFileOpen_Click"/>
+            <Menu DockPanel.Dock="Left" FlowDirection="LeftToRight">
+                <MenuItem Header="_File" HorizontalAlignment="Left" FlowDirection="RightToLeft">
+                    <MenuItem Header="_Open" Click="OptFileOpen_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
                 </MenuItem>
-                <MenuItem Header="_Options" HorizontalAlignment="Left" VerticalContentAlignment="Top">
-                    <MenuItem Header="_Encryption protocol" Click="OptEncProtocol_Click" HorizontalAlignment="Left" VerticalAlignment="Top"></MenuItem>
+                <MenuItem Header="_Options" HorizontalAlignment="Left" VerticalContentAlignment="Top" FlowDirection="RightToLeft">
+                    <MenuItem Header="_Encryption protocol" Click="OptEncProtocol_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="RightToLeft"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -45,7 +45,7 @@
         <Button x:Name="BtnClear" TabIndex="8" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="360,160,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="BtnCopy" TabIndex="7" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="360,120,0,0" VerticalAlignment="Top" Width="80"/>
         <!--#endregion-->
-        
+
         <!--#region Output rechts -->
         <TextBox x:Name="ausgabeTopR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ausgabeTop1R" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="480,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
@@ -57,7 +57,7 @@
         <TextBox x:Name="sharedSecretKeyBobBox" IsReadOnly="True" HorizontalAlignment="Right" Height="20" Margin="0,340,262,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ZeitAusgabe" HorizontalAlignment="Left" Height="20" Margin="640,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <!--#endregion-->
-        
+
         <!--#region Namen rechts -->
         <TextBlock x:Name="privateKeyA" HorizontalAlignment="Left" Height="20" Margin="580,40,0,0" TextWrapping="Wrap" Text="Private key Alice" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
         <TextBlock x:Name="privteKeyB" HorizontalAlignment="Left" Height="20" Margin="580,80,0,0" TextWrapping="Wrap" Text="Private Key Bob" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.476,0.871"/>
@@ -69,14 +69,14 @@
         <TextBlock x:Name="secretSharedKey_Copy1" HorizontalAlignment="Left" Height="20" Margin="550,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" RenderTransformOrigin="0.476,0.871"><Run Text="Shared secret key"/><Run Text=" "/><Run Text="Bob"/></TextBlock>
         <TextBlock x:Name="Zeit" HorizontalAlignment="Left" Height="20" Margin="740,160,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
         <!--#endregion-->
-        
+
         <!--#region Output links -->
         <TextBox x:Name="generatePublicKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False" IsInactiveSelectionHighlightEnabled="False" IsReadOnlyCaretVisible="False"/>
         <TextBox x:Name="generatePublicKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="generateExchangeKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="generateExchangeKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="270,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
         <!--#endregion-->
-        
+
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="360,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
     </Grid>
 </Window>

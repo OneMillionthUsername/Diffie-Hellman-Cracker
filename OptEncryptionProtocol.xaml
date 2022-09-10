@@ -1,0 +1,23 @@
+﻿<Window x:Class="Diffie_Hellman_Crack.OptEncryptionProtocol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diffie_Hellman_Crack"
+        mc:Ignorable="d"
+        Title="Encrypton" Height="80" Width="320">
+    <Grid Margin="0,0,0,0">
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+        </Grid.Background>
+        <ComboBox x:Name="comboBox" Text="Keys" HorizontalAlignment="Left" Height="20" Margin="205,14,0,0" VerticalAlignment="Top" Width="80" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem x:Name="Key_length_8" Content="8 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_16" Content="16 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_32" Content="32 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_64" Content="64 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_128" Content="128 bit"></ComboBoxItem>
+        </ComboBox>
+        <TextBox x:Name="textBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,14,0,0" Text="Verschlüsselungs Key Länge " TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Background="{x:Null}" BorderBrush="{x:Null}">
+        </TextBox>
+    </Grid>
+</Window>

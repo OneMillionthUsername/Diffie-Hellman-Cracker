@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Deffi_Hellman_Cracker {
+namespace Diffie_Hellman_Crack {
 	/// <summary>
 	/// Interaktionslogik für "App.xaml"
 	/// </summary>

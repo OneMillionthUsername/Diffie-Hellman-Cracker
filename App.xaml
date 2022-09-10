@@ -1,7 +1,7 @@
-﻿<Application x:Class="Deffi_Hellman_Cracker.App"
+﻿<Application x:Class="Diffie_Hellman_Crack.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Deffi_Hellman_Cracker"
+             xmlns:local="clr-namespace:Diffie_Hellman_Crack"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

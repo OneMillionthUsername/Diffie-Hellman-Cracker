@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace Deffi_Hellman_Cracker.Properties
+namespace Diffie_Hellman_Crack.Properties
 {
 	/// <summary>
 	///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
