@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace WpfApp1.Properties
+namespace Deffi_Hellman_Cracker.Properties
 {
 	/// <summary>
 	///   Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.

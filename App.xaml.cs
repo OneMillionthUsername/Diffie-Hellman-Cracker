@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WpfApp1 {
+namespace Deffi_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für "App.xaml"
 	/// </summary>

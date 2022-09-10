@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfApp1 {
+namespace Deffi_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
@@ -223,7 +223,7 @@ namespace WpfApp1 {
 		private bool CheckInputPrime() {
 			if (gmp_lib.mpz_probab_prime_p(basis, 25) != 2) {
 				inputBoxes[1].Background = Brushes.Red;
-				ErrorMessageBox("Number is not prime!", "Number");
+				ErrorMessageBox("Number is not prime!", "Public key Bob");
 				return false;
 			}
 			else {
@@ -241,6 +241,9 @@ namespace WpfApp1 {
 			MessageBoxResult result;
 
 			result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+		}
+		private void OptEncProtocol_Click(object sender, RoutedEventArgs e) {
+
 		}
 	}
 }

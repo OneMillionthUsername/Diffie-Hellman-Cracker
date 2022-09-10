@@ -1,13 +1,24 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Class="Deffi_Hellman_Cracker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:Deffi_Hellman_Cracker"
         mc:Ignorable="d"
         Title="Diffie-Hellman-Cracker" Height="450" Width="800">
 
     <Grid Background="AliceBlue">
+        <!--MENU-->
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Click="OptFileOpen_Click"/>
+                </MenuItem>
+                <MenuItem Header="Options">
+                    <MenuItem Header="Encryption protocol" Click="OptEncProtocol_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
         <!--Namen links-->
         <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
         <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="120,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
