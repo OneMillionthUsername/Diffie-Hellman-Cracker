@@ -12,8 +12,8 @@ namespace Diffie_Hellman_Crack {
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window {
-		public mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
-		public mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(16);
+		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
+		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(16);
 
 		//declartion
 		public delegate bool CheckInput();

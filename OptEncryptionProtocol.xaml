@@ -5,19 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diffie_Hellman_Crack"
         mc:Ignorable="d"
-        Title="Encrypton" Height="80" Width="320">
+        Title="Encrypton" Height="160" Width="320">
     <Grid Margin="0,0,0,0">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
         </Grid.Background>
-        <ComboBox x:Name="comboBox" Text="Keys" HorizontalAlignment="Left" Height="20" Margin="205,14,0,0" VerticalAlignment="Top" Width="80" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem x:Name="Key_length_8" Content="8 bit"></ComboBoxItem>
-            <ComboBoxItem x:Name="Key_length_16" Content="16 bit"></ComboBoxItem>
-            <ComboBoxItem x:Name="Key_length_32" Content="32 bit"></ComboBoxItem>
-            <ComboBoxItem x:Name="Key_length_64" Content="64 bit"></ComboBoxItem>
-            <ComboBoxItem x:Name="Key_length_128" Content="128 bit"></ComboBoxItem>
+        <ComboBox x:Name="comboBox" Text="Keys" HorizontalAlignment="Left" Height="20" Margin="200,14,0,0" VerticalAlignment="Top" Width="80">
+            <ComboBoxItem x:Name="Key_length_8" Selected="Key_length_8_Selected" Content="8 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_16" Selected="Key_length_16_Selected" Content="16 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_32" Selected="Key_length_32_Selected" Content="32 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_64" Selected="Key_length_64_Selected" Content="64 bit"></ComboBoxItem>
+            <ComboBoxItem x:Name="Key_length_128" Selected="Key_length_128_Selected" Content="128 bit"></ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="textBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,14,0,0" Text="Verschlüsselungs Key Länge " TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Background="{x:Null}" BorderBrush="{x:Null}">
-        </TextBox>
+        <TextBox x:Name="Verschluesselungs_Key_Laenge" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,14,0,0" Text="Verschlüsselungs Key Länge" TextWrapping="Wrap" VerticalAlignment="Top"
+                 Width="165" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False"/>
+        <ComboBox x:Name="comboBox_Copy" Text="Keys" HorizontalAlignment="Left" Height="20" Margin="200,64,0,0" VerticalAlignment="Top" Width="80">
+            <ComboBoxItem x:Name="Key_length_1" Selected="Prme_Key_length_8_Selected" Content="8 bit"/>
+            <ComboBoxItem x:Name="Key_length_2" Selected="Prme_Key_length_16_Selected" Content="16 bit"/>
+            <ComboBoxItem x:Name="Key_length_3" Selected="Prme_Key_length_32_Selected" Content="32 bit"/>
+            <ComboBoxItem x:Name="Key_length_4" Selected="Prme_Key_length_64_Selected" Content="64 bit"/>
+            <ComboBoxItem x:Name="Key_length_5" Selected="Prme_Key_length_128_Selected" Content="128 bit"/>
+        </ComboBox>
+        <TextBox x:Name="Primzahl_Key_Laenge" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="20,64,0,0" Text="Primzahl Key Länge" TextWrapping="Wrap" VerticalAlignment="Top"
+            Width="165" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False"/>
+
     </Grid>
 </Window>
