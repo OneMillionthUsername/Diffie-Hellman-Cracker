@@ -95,7 +95,8 @@ namespace WpfApp1 {
 			gmp_lib.mpz_clears(modulo, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e) {
-			CheckInput checkInput = CheckInputSyntax;
+			CheckInput checkInput = SetValues;
+			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
 
 			foreach (CheckInput item in checkInput.GetInvocationList()) {
@@ -106,25 +107,11 @@ namespace WpfApp1 {
 					return;
 				}
 			}
-			
-			//wenn es etwas zum kopieren gibt und die inputbox leer ist, kopiere.
-			if (!string.IsNullOrWhiteSpace(generateAlicePrivate.Text) && string.IsNullOrWhiteSpace(inputBoxes[0].Text)) {
-				CopyGeneratedData();
-			}
 
-			//set default values if input is empty
-			if (string.IsNullOrEmpty(modulo.ToString()) && !string.IsNullOrEmpty(publicKeyAinput.Text)) {
-				modulo = publicKeyAinput.Text;
-			}
-			if (string.IsNullOrEmpty(basis.ToString()) && !string.IsNullOrEmpty(publicKeyBinput.Text)) {
-				basis = publicKeyBinput.Text;
-			}
-			if (string.IsNullOrEmpty(ExchangeKeyAlice.ToString()) && !string.IsNullOrEmpty(exchangeKeyAinput.Text)) {
-				ExchangeKeyAlice = exchangeKeyAinput.Text;
-			}
-			if (string.IsNullOrEmpty(ExchangeKeyBob.ToString()) && !string.IsNullOrEmpty(exchangeKeyBinput.Text)) {
-				ExchangeKeyBob = exchangeKeyBinput.Text;
-			}
+			//wenn es etwas zum kopieren gibt und die inputbox leer ist, kopiere.
+			//if (!string.IsNullOrWhiteSpace(generateAlicePrivate.Text) && string.IsNullOrWhiteSpace(inputBoxes[0].Text)) {
+			//	CopyGeneratedData();
+			//}
 
 			//prüfen ob jede Box ausgefüllt ist
 			foreach (TextBox item in inputBoxes) {
@@ -144,7 +131,6 @@ namespace WpfApp1 {
 			exponent = 0;
 			stopwatch.Start();
 			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0) {
-				//versuche und exponent reseten
 				Versuche++;
 				exponent++;
 
@@ -173,6 +159,29 @@ namespace WpfApp1 {
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
+		}
+
+		private bool SetValues() {
+			//set default values if input is empty
+			int error = 0;
+			//bevorzuge imer Wert aus input
+			if (modulo.ToString() != publicKeyAinput.Text) {
+				modulo = publicKeyAinput.Text;
+				error++;
+			}
+			if (basis.ToString() != publicKeyBinput.Text) {
+				basis = publicKeyBinput.Text;
+				error++;
+			}
+			if (ExchangeKeyAlice.ToString() != exchangeKeyAinput.Text) {
+				ExchangeKeyAlice = exchangeKeyAinput.Text;
+				error++;
+			}
+			if (ExchangeKeyBob.ToString() != exchangeKeyBinput.Text) {
+				ExchangeKeyBob = exchangeKeyBinput.Text;
+				error++;
+			}
+			return error == 0 || error == 4;
 		}
 
 		private void BtnCreateKey(object sender, RoutedEventArgs e) {
