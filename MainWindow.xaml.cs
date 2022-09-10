@@ -216,8 +216,8 @@ namespace WpfApp1 {
 					item.Background = Brushes.White;
 				}
 			}
-				if (errors > 0)
-					ErrorMessageBox("Syntaxerror!", "Syntax");
+			if (errors > 0)
+				ErrorMessageBox("Syntaxerror!", "Syntax");
 			return errors <= 0;
 		}
 		private bool CheckInputPrime() {
