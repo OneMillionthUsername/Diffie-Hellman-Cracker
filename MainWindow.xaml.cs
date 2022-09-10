@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -86,6 +85,7 @@ namespace WpfApp1 {
 			#endregion
 		}
 
+		//async checken wann das Literal legal ist.
 		//private async Task CheckInputInRealTime() {
 		//	MainWindow mainWindow = await CheckInputSyntax();
 		//}
@@ -98,7 +98,6 @@ namespace WpfApp1 {
 			CheckInput checkInput = SetValues;
 			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
-
 			foreach (CheckInput item in checkInput.GetInvocationList()) {
 				if (item.Invoke()) {
 					continue;
@@ -107,7 +106,6 @@ namespace WpfApp1 {
 					return;
 				}
 			}
-
 			int i = 0;
 			Versuche = 0;
 			exponent = 0;
@@ -142,24 +140,14 @@ namespace WpfApp1 {
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
 		}
-
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input
-			if (modulo.ToString() != publicKeyAinput.Text) {
-				modulo = publicKeyAinput.Text;
-			}
-			if (basis.ToString() != publicKeyBinput.Text) {
-				basis = publicKeyBinput.Text;
-			}
-			if (ExchangeKeyAlice.ToString() != exchangeKeyAinput.Text) {
-				ExchangeKeyAlice = exchangeKeyAinput.Text;
-			}
-			if (ExchangeKeyBob.ToString() != exchangeKeyBinput.Text) {
-				ExchangeKeyBob = exchangeKeyBinput.Text;
-			}
+			modulo = publicKeyAinput.Text;
+			basis = publicKeyBinput.Text;
+			ExchangeKeyAlice = exchangeKeyAinput.Text;
+			ExchangeKeyBob = exchangeKeyBinput.Text;
 			return true;
 		}
-
 		private void BtnCreateKey(object sender, RoutedEventArgs e) {
 			//erstelle öffentlichen Handshake
 			gmp_lib.mpz_urandomb(modulo, rnd, BitStandard);
@@ -228,12 +216,14 @@ namespace WpfApp1 {
 					item.Background = Brushes.White;
 				}
 			}
+				if (errors > 0)
+					ErrorMessageBox("Syntaxerror!", "Syntax");
 			return errors <= 0;
 		}
-		//nur bei Eingabe checken, da beim generieren schon auf prime getestet wurde
 		private bool CheckInputPrime() {
 			if (gmp_lib.mpz_probab_prime_p(basis, 25) != 2) {
 				inputBoxes[1].Background = Brushes.Red;
+				ErrorMessageBox("Number is not prime!", "Number");
 				return false;
 			}
 			else {
@@ -242,6 +232,15 @@ namespace WpfApp1 {
 		}
 		private bool CheckInputPrime(mpz_t prime, mpz_t multipleOfPrime) {
 			return gmp_lib.mpz_probab_prime_p(prime, 25) == 2 && gmp_lib.mpz_divisible_p(prime, multipleOfPrime) == 0;
+		}
+		private void ErrorMessageBox(string errMessage, string errCaption) {
+			string messageBoxText = errMessage;
+			string caption = errCaption;
+			MessageBoxButton button = MessageBoxButton.OK;
+			MessageBoxImage icon = MessageBoxImage.Error;
+			MessageBoxResult result;
+
+			result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
 		}
 	}
 }
