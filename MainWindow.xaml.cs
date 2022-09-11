@@ -12,18 +12,21 @@ namespace Diffie_Hellman_Crack {
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window {
-		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
-		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(16);
+		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(8);
+		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(8);
 
-		//declartion
+		#region DECLARATION
 		public delegate bool CheckInput();
 		readonly List<TextBox> inputBoxes = new List<TextBox>();
 		readonly List<TextBox> generatedBoxes = new List<TextBox>();
 		readonly List<TextBox> allBoxes = new List<TextBox>();
 		private ulong Versuche = 0;
 		private mpz_t exponent = new mpz_t();
+		private mpz_t gcd = new mpz_t();
+		private mpz_t ext_gcd_s = new mpz_t();
+		private mpz_t ext_gcd_t = new mpz_t();
 		private readonly gmp_randstate_t rnd = new gmp_randstate_t();
-		private mpz_t modulo = new mpz_t();
+		private mpz_t group = new mpz_t();
 		private mpz_t basis = new mpz_t();
 		private readonly mpz_t alicePrivate = new mpz_t();
 		private readonly mpz_t bobPrivate = new mpz_t();
@@ -34,7 +37,8 @@ namespace Diffie_Hellman_Crack {
 		private readonly mpz_t secretKeyBob = new mpz_t();
 		private readonly mpz_t secretKeyAlice = new mpz_t();
 		private readonly mpz_t result = new mpz_t();
-		private readonly Stopwatch stopwatch = new Stopwatch();
+		private readonly Stopwatch stopwatch = new Stopwatch(); 
+		#endregion
 
 		public MainWindow() {
 			InitializeComponent();
@@ -45,7 +49,7 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
 			gmp_lib.mpz_init(alicePrivate);
 			gmp_lib.mpz_init(bobPrivate);
-			gmp_lib.mpz_init(modulo);
+			gmp_lib.mpz_init(group);
 			gmp_lib.mpz_init(basis);
 			gmp_lib.mpz_init(ExchangeKeyAlice);
 			gmp_lib.mpz_init(ExchangeKeyBob);
@@ -54,6 +58,9 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.mpz_init(secretKeyAlice);
 			gmp_lib.mpz_init(secretKeyBob);
 			gmp_lib.mpz_init(result);
+			gmp_lib.mpz_init(gcd);
+			gmp_lib.mpz_init(ext_gcd_s);
+			gmp_lib.mpz_init(ext_gcd_t);
 			#endregion
 			#region FILL LISTS
 			inputBoxes.Add(publicKeyAinput);
@@ -93,7 +100,7 @@ namespace Diffie_Hellman_Crack {
 
 		~MainWindow() {
 			gmp_lib.gmp_randclear(rnd);
-			gmp_lib.mpz_clears(modulo, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
+			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e) {
 			CheckInput checkInput = SetValues;
@@ -111,12 +118,12 @@ namespace Diffie_Hellman_Crack {
 			Versuche = 0;
 			//exponent = 1;
 			stopwatch.Start();
-			while (gmp_lib.mpz_cmp(modulo, exponent) >= 0) {
+			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
 				Versuche++;
 				//exponent++;
 				gmp_lib.mpz_add_ui(exponent, exponent, 1);
 
-				gmp_lib.mpz_powm(result, basis, exponent, modulo);
+				gmp_lib.mpz_powm(result, basis, exponent, group);
 
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0) {
 					//exponent wird größer als uint
@@ -131,8 +138,8 @@ namespace Diffie_Hellman_Crack {
 					break;
 				}
 			}
-			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice, modulo);
-			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob, modulo);
+			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice, group);
+			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob, group);
 
 			stopwatch.Stop();
 			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -145,7 +152,7 @@ namespace Diffie_Hellman_Crack {
 		}
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input
-			modulo = publicKeyAinput.Text;
+			group = publicKeyAinput.Text;
 			basis = publicKeyBinput.Text;
 			ExchangeKeyAlice = exchangeKeyAinput.Text;
 			ExchangeKeyBob = exchangeKeyBinput.Text;
@@ -153,30 +160,30 @@ namespace Diffie_Hellman_Crack {
 		}
 		private void BtnCreateKey(object sender, RoutedEventArgs e) {
 			//erstelle öffentlichen Handshake
-			gmp_lib.mpz_urandomb(modulo, rnd, BitStandard);
-			generatePublicKeyAinput.Text = modulo.ToString();
-			//garantiere prime und kein Vielfaches
+			gmp_lib.mpz_urandomb(group, rnd, BitStandard);
+			generatePublicKeyAinput.Text = group.ToString();
+			//garantiere prime und gcd == 1
 			do {
 				gmp_lib.mpz_urandomb(basis, rnd, BitStandardPrime);
-			} while (!CheckInputPrime(basis, modulo));
+			} while (!CheckInputPrime(basis, group));
 			generatePublicKeyBinput.Text = basis.ToString();
 
 			//erstelle privaten Schlüssel
-			gmp_lib.mpz_urandomb(alicePrivate, rnd, BitStandard);
+			gmp_lib.mpz_urandomm(alicePrivate, rnd, group);
 			generateAlicePrivate.Text = alicePrivate.ToString();
-			gmp_lib.mpz_urandomb(bobPrivate, rnd, BitStandard);
+			gmp_lib.mpz_urandomm(bobPrivate, rnd, group);
 			generateBobPrivate.Text = bobPrivate.ToString();
 
 			//erstelle exchange keys
-			gmp_lib.mpz_powm(ExchangeKeyAlice, basis, alicePrivate, modulo);
+			gmp_lib.mpz_powm(ExchangeKeyAlice, basis, alicePrivate, group);
 			generateExchangeKeyAinput.Text = ExchangeKeyAlice.ToString();
-			gmp_lib.mpz_powm(ExchangeKeyBob, basis, bobPrivate, modulo);
+			gmp_lib.mpz_powm(ExchangeKeyBob, basis, bobPrivate, group);
 			generateExchangeKeyBinput.Text = ExchangeKeyBob.ToString();
 
 			//erstelle die secret shared Schlüssel
-			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, alicePrivate, modulo);
+			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, alicePrivate, group);
 			sharedSecretKeyAliceBox.Text = sharedSecretKeyAlice.ToString();
-			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, bobPrivate, modulo);
+			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, bobPrivate, group);
 			sharedSecretKeyBobBox.Text = sharedSecretKeyBob.ToString();
 		}
 		private void BtnClearKey(object sender, RoutedEventArgs e) {
@@ -233,8 +240,10 @@ namespace Diffie_Hellman_Crack {
 				return true;
 			}
 		}
-		private bool CheckInputPrime(mpz_t prime, mpz_t multipleOfPrime) {
-			return gmp_lib.mpz_probab_prime_p(prime, 25) == 2 && gmp_lib.mpz_divisible_p(prime, multipleOfPrime) == 0;
+		private bool CheckInputPrime(mpz_t basis, mpz_t group) {
+			gmp_lib.mpz_gcdext(gcd, ext_gcd_s, ext_gcd_t, basis, group);
+
+			return gmp_lib.mpz_probab_prime_p(basis, 25) == 2 && gmp_lib.mpz_divisible_p(basis, group) == 0 && gmp_lib.mpz_cmp_ui(gcd, 1) == 0;
 		}
 		private void ErrorMessageBox(string errMessage, string errCaption) {
 			string messageBoxText = errMessage;

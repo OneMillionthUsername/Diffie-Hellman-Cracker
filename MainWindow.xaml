@@ -22,12 +22,12 @@
         <!--#endregion-->
 
         <!--#region Namen links -->
-        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
-        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
+        <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key group"/></TextBlock>
+        <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key base"/></TextBlock>
         <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="60,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
         <TextBlock x:Name="exchangeKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
-        <TextBlock x:Name="publicKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Alice"/></TextBlock>
-        <TextBlock x:Name="publicKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key Bob"/></TextBlock>
+        <TextBlock x:Name="publicKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key group"/></TextBlock>
+        <TextBlock x:Name="publicKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key base"/></TextBlock>
         <TextBlock x:Name="exchangeKeyA_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="60,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
         <TextBlock x:Name="exchangeKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
         <!--#endregion-->
@@ -39,6 +39,13 @@
         <TextBox x:Name="exchangeKeyBinput" TabIndex="4" HorizontalAlignment="Left" Height="20" Margin="190,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <!--#endregion-->
 
+        <!--#region Output links -->
+        <TextBox x:Name="generatePublicKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generatePublicKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateExchangeKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateExchangeKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <!--#endregion-->
+        
         <!--#region Buttons -->
         <Button x:Name="button_crackKey" TabIndex="5" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="350,40,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="button_createKey" TabIndex="6" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="350,80,0,0" VerticalAlignment="Top" Width="90"/>
@@ -70,13 +77,7 @@
         <TextBlock x:Name="Zeit" HorizontalAlignment="Left" Height="20" Margin="740,10,0,0" TextWrapping="Wrap" Text="Zeit" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.476,0.871"/>
         <!--#endregion-->
 
-        <!--#region Output links -->
-        <TextBox x:Name="generatePublicKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False" IsInactiveSelectionHighlightEnabled="False" IsReadOnlyCaretVisible="False"/>
-        <TextBox x:Name="generatePublicKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateExchangeKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateExchangeKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <!--#endregion-->
 
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="360,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="350,200,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
     </Grid>
 </Window>
