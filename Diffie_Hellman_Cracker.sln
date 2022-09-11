@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diffie_Hellman_Cracker", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC5BCB39-1048-4405-89F6-5A90E0C4394C}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\clock_wo_bg.png = ..\..\..\..\Desktop\clock_wo_bg.png
 		DHM-Theorie.txt = DHM-Theorie.txt
+		..\..\..\..\Desktop\key_wo_bg.png = ..\..\..\..\Desktop\key_wo_bg.png
 	EndProjectSection
 EndProject
 Global

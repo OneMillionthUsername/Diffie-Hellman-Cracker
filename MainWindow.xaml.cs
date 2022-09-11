@@ -14,7 +14,6 @@ namespace Diffie_Hellman_Crack {
 	public partial class MainWindow : Window {
 		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(8);
 		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(8);
-
 		#region DECLARATION
 		public delegate bool CheckInput();
 		readonly List<TextBox> inputBoxes = new List<TextBox>();
@@ -39,7 +38,6 @@ namespace Diffie_Hellman_Crack {
 		private readonly mpz_t result = new mpz_t();
 		private readonly Stopwatch stopwatch = new Stopwatch(); 
 		#endregion
-
 		public MainWindow() {
 			InitializeComponent();
 			//CheckInputInRealTime();
@@ -122,6 +120,7 @@ namespace Diffie_Hellman_Crack {
 			//EXPONENT RESETEN und auf 1 setzen
 			gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_add_ui(exponent, exponent, 1);
+			ProgressBar.IsIndeterminate = true;
 
 			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
 				Versuche++;
@@ -148,6 +147,7 @@ namespace Diffie_Hellman_Crack {
 
 			stopwatch.Stop();
 			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+			ProgressBar.IsIndeterminate = false;
 			stopwatch.Reset();
 
 			ausgabeTopR.Text = secretKeyAlice.ToString();
