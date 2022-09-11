@@ -5,7 +5,7 @@ Nimmt man ein beliebiges Element a aus Z p ∗ und betrachtet die Menge { a , a 
 dann erhält man eine Untergruppe (mit a als Generator der Untergruppe). Jede Untergruppe von Z p ∗  hat mindestens einen Generator,
 und damit auch Z p ∗ selbst. Die Gruppe Z p ∗ ist also zyklisch. Zum Beispiel ist Z 13 ∗ eine zyklische Gruppe mit der 2 als Generator,
 denn jede Zahl von 1 bis 12 lässt sich als Potenz von 2 darstellen:
-{\displaystyle 1=2^{12}\ {\bmod {\ }}13}
+ 1=2^{12}\ {\bmod {\ }}13}
 2 = 2 1   mod   13 
 3 = 2 4   mod   13 
 4 = 2 2   mod   13 
@@ -22,4 +22,13 @@ Für a = 3, x = Exponent, b = Ergebnis, p = mod als Generator erhält man dagege
 1 = 3^3   mod   13 = 3^6   mod   13 = 3^9   mod   13 = 3^12   mod   13
 3 = 3^1   mod   13 = 3^4   mod   13 = 3^7   mod   13 = 3^10   mod   13
 9 = 3^2   mod   13 = 3^5   mod   13 = 3^8   mod   13 = 3^11   mod   13
-Es lässt sich leicht nachvollziehe, dass die Gleichung a^x = b mod p immer lösbar ist, wenn a ein Generator von Z p ∗ ist, wobei dann b ein Element von Z p ∗ ist (außer 0). 
+Es lässt sich leicht nachvollziehe, dass die Gleichung a^x = b mod p immer lösbar ist, wenn a ein Generator von Z p ∗ ist,
+wobei dann b ein Element von Z p ∗ ist (außer 0). 
+Man nennt ein erzeugendes Element von Z p ∗ auch Primitivwurzel zum Modul p. Die Zahl 2  ist also eine Primitivwurzel modulo 13,
+die Zahl 3 dagegen nicht. Es lassen sich alle Elemente 1 , 2 , … , 12 der primen Restklassengruppe modulo 13 als Potenzen von 2 darstellen.
+In der Folge der Potenzen von 3 modulo 13 wiederholen sich jedoch die Reste (siehe oben). 
+
+Für eine Primzahl p gibt es genau φ ( p − 1 ) Primitivwurzeln mod   p, wobei φ für die Eulersche Phi-Funktion steht, die für jede natürliche
+Zahl die Anzahl ihrer teilerfremden natürlichen Zahlen angibt.
+
+Für p = 13 ist p − 1 = 12 und φ ( 12 ) = 4, woraus folgt, dass es 4 Primitivwurzeln modulo 13 gibt (nämlich 2, 6, 7 und 11). 
