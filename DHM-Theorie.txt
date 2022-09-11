@@ -1,0 +1,25 @@
+﻿In der Kryptographie sind vor allem jene Zahlen n von Interesse, für die alle Zahlen zwischen 1 und n − 1 ein inverses Element
+modulo n haben. Dies ist genau dann der Fall, wenn n eine Primzahl ist (weshalb man p statt n schreibt). Die Zahlen zwischen 1
+und p − 1 bilden also zusammen mit der Modulo-Multiplikation die Gruppe Z p ∗ Eine weitere Aussage, die sich beweisen lässt:
+Nimmt man ein beliebiges Element a aus Z p ∗ und betrachtet die Menge { a , a 2 , a 3 , . . . , a p − 1 ( mod   p ), 
+dann erhält man eine Untergruppe (mit a als Generator der Untergruppe). Jede Untergruppe von Z p ∗  hat mindestens einen Generator,
+und damit auch Z p ∗ selbst. Die Gruppe Z p ∗ ist also zyklisch. Zum Beispiel ist Z 13 ∗ eine zyklische Gruppe mit der 2 als Generator,
+denn jede Zahl von 1 bis 12 lässt sich als Potenz von 2 darstellen:
+{\displaystyle 1=2^{12}\ {\bmod {\ }}13}
+2 = 2 1   mod   13 
+3 = 2 4   mod   13 
+4 = 2 2   mod   13 
+5 = 2 9   mod   13 
+6 = 2 5   mod   13 
+7 = 2 11  mod   13
+8 = 2 3   mod   13 
+9 = 2 8   mod   13 
+10 = 2 10  mod  13
+11 = 2 7   mod  13 
+12 = 2 6   mod  13 
+
+Für a = 3, x = Exponent, b = Ergebnis, p = mod als Generator erhält man dagegen nur die Untergruppe mit den Elementen { 1 , 3 , 9 
+1 = 3^3   mod   13 = 3^6   mod   13 = 3^9   mod   13 = 3^12   mod   13
+3 = 3^1   mod   13 = 3^4   mod   13 = 3^7   mod   13 = 3^10   mod   13
+9 = 3^2   mod   13 = 3^5   mod   13 = 3^8   mod   13 = 3^11   mod   13
+Es lässt sich leicht nachvollziehe, dass die Gleichung a^x = b mod p immer lösbar ist, wenn a ein Generator von Z p ∗ ist, wobei dann b ein Element von Z p ∗ ist (außer 0). 
