@@ -118,6 +118,11 @@ namespace Diffie_Hellman_Crack {
 			Versuche = 0;
 			//exponent = 1;
 			stopwatch.Start();
+
+			//EXPONENT RESETEN und auf 1 setzen
+			gmp_lib.mpz_init(exponent);
+			gmp_lib.mpz_add_ui(exponent, exponent, 1);
+
 			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
 				Versuche++;
 				//exponent++;
@@ -165,7 +170,7 @@ namespace Diffie_Hellman_Crack {
 			//garantiere prime und gcd == 1
 			do {
 				gmp_lib.mpz_urandomb(basis, rnd, BitStandardPrime);
-			} while (!CheckInputPrime(basis, group));
+			} while (!(CheckInputPrime(basis, group) && gmp_lib.mpz_cmp(basis, group) < 0));
 			generatePublicKeyBinput.Text = basis.ToString();
 
 			//erstelle privaten Schlüssel
@@ -242,7 +247,6 @@ namespace Diffie_Hellman_Crack {
 		}
 		private bool CheckInputPrime(mpz_t basis, mpz_t group) {
 			gmp_lib.mpz_gcdext(gcd, ext_gcd_s, ext_gcd_t, basis, group);
-
 			return gmp_lib.mpz_probab_prime_p(basis, 25) == 2 && gmp_lib.mpz_divisible_p(basis, group) == 0 && gmp_lib.mpz_cmp_ui(gcd, 1) == 0;
 		}
 		private void ErrorMessageBox(string errMessage, string errCaption) {
