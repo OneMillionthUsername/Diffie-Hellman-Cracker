@@ -41,7 +41,6 @@ namespace Diffie_Hellman_Crack {
 		#endregion
 		public MainWindow() {
 			InitializeComponent();
-			//CheckInputInRealTime();
 			#region INIT VARS
 			gmp_lib.mpz_init(exponent);
 			gmp_lib.gmp_randinit_mt(rnd);
@@ -101,7 +100,7 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.gmp_randclear(rnd);
 			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
-		private void BtnCrackKey(object sender, RoutedEventArgs e) {
+		private void BtnCrackKey() {
 			CheckInput checkInput = SetValues;
 			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
@@ -156,11 +155,8 @@ namespace Diffie_Hellman_Crack {
 		private async void StartProgressBar(object sender, RoutedEventArgs e) {
 			stopwatch.Start();
 			ProgressBar.IsIndeterminate = true;
-			Task task = new Task(new Action(() => BtnCrackKey(sender, e)));
-			while (!task.IsCompleted) {
-				ZeitAusgabe.Text = (stopwatch.ElapsedMilliseconds / 1000).ToString();
-				
-			}
+			Task task = new Task(new Action(() => BtnCrackKey()));
+			//task.Start();
 			await task;
 			stopwatch.Stop();
 			stopwatch.Reset();
