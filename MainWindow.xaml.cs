@@ -21,7 +21,7 @@ namespace Diffie_Hellman_Crack {
 		readonly List<TextBox> generatedBoxes = new List<TextBox>();
 		readonly List<TextBox> allBoxes = new List<TextBox>();
 		private ulong Versuche = 0;
-		private uint exponent = 0;
+		private mpz_t exponent = new mpz_t();
 		private readonly gmp_randstate_t rnd = new gmp_randstate_t();
 		private mpz_t modulo = new mpz_t();
 		private mpz_t basis = new mpz_t();
@@ -40,6 +40,7 @@ namespace Diffie_Hellman_Crack {
 			InitializeComponent();
 			//CheckInputInRealTime();
 			#region INIT VARS
+			gmp_lib.mpz_init(exponent);
 			gmp_lib.gmp_randinit_mt(rnd);
 			gmp_lib.gmp_randseed_ui(rnd, (uint)DateTime.UtcNow.Second);
 			gmp_lib.mpz_init(alicePrivate);
@@ -108,20 +109,22 @@ namespace Diffie_Hellman_Crack {
 			}
 			int i = 0;
 			Versuche = 0;
-			exponent = 1;
+			//exponent = 1;
 			stopwatch.Start();
-			while (gmp_lib.mpz_cmp_ui(modulo, exponent) >= 0) {
+			while (gmp_lib.mpz_cmp(modulo, exponent) >= 0) {
 				Versuche++;
-				exponent++;
+				//exponent++;
+				gmp_lib.mpz_add_ui(exponent, exponent, 1);
 
-				gmp_lib.mpz_powm_ui(result, basis, exponent, modulo);
+				gmp_lib.mpz_powm(result, basis, exponent, modulo);
 
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0) {
-					gmp_lib.mpz_init_set_ui(secretKeyAlice, exponent);
+					//exponent wird größer als uint
+					gmp_lib.mpz_init_set(secretKeyAlice, exponent);
 					i++;
 				}
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyBob) == 0) {
-					gmp_lib.mpz_init_set_ui(secretKeyBob, exponent);
+					gmp_lib.mpz_init_set(secretKeyBob, exponent);
 					i++;
 				}
 				if (i >= 2) {
@@ -159,9 +162,9 @@ namespace Diffie_Hellman_Crack {
 			generatePublicKeyBinput.Text = basis.ToString();
 
 			//erstelle privaten Schlüssel
-			gmp_lib.mpz_urandomb(alicePrivate, rnd, BitStandardPrime);
+			gmp_lib.mpz_urandomb(alicePrivate, rnd, BitStandard);
 			generateAlicePrivate.Text = alicePrivate.ToString();
-			gmp_lib.mpz_urandomb(bobPrivate, rnd, BitStandardPrime);
+			gmp_lib.mpz_urandomb(bobPrivate, rnd, BitStandard);
 			generateBobPrivate.Text = bobPrivate.ToString();
 
 			//erstelle exchange keys
