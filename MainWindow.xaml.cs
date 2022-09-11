@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,7 +13,7 @@ namespace Diffie_Hellman_Crack {
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window {
-		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(8);
+		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(16);
 		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(8);
 		#region DECLARATION
 		public delegate bool CheckInput();
@@ -115,12 +116,11 @@ namespace Diffie_Hellman_Crack {
 			int i = 0;
 			Versuche = 0;
 			//exponent = 1;
-			stopwatch.Start();
 
 			//EXPONENT RESETEN und auf 1 setzen
 			gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_add_ui(exponent, exponent, 1);
-			ProgressBar.IsIndeterminate = true;
+
 
 			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
 				Versuche++;
@@ -130,7 +130,7 @@ namespace Diffie_Hellman_Crack {
 				gmp_lib.mpz_powm(result, basis, exponent, group);
 
 				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0) {
-					//exponent wird größer als uint
+					//exponent wird größer als uint !!!!!!!!!!
 					gmp_lib.mpz_init_set(secretKeyAlice, exponent);
 					i++;
 				}
@@ -142,18 +142,29 @@ namespace Diffie_Hellman_Crack {
 					break;
 				}
 			}
+
 			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice, group);
 			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob, group);
 
-			stopwatch.Stop();
 			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-			ProgressBar.IsIndeterminate = false;
-			stopwatch.Reset();
 
 			ausgabeTopR.Text = secretKeyAlice.ToString();
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
+		}
+		private async void StartProgressBar(object sender, RoutedEventArgs e) {
+			stopwatch.Start();
+			ProgressBar.IsIndeterminate = true;
+			Task task = new Task(new Action(() => BtnCrackKey(sender, e)));
+			while (!task.IsCompleted) {
+				ZeitAusgabe.Text = (stopwatch.ElapsedMilliseconds / 1000).ToString();
+				
+			}
+			await task;
+			stopwatch.Stop();
+			stopwatch.Reset();
+			ProgressBar.IsIndeterminate = false;
 		}
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input

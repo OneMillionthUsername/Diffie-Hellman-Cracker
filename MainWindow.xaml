@@ -52,7 +52,7 @@
         <!--#endregion-->
 
         <!--#region Buttons -->
-        <Button x:Name="button_crackKey" TabIndex="5" Click="BtnCrackKey" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="350,40,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="button_crackKey" TabIndex="5" Click="StartProgressBar" Content="Crack key" HorizontalAlignment="Left" Height="20" Margin="350,40,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="button_createKey" TabIndex="6" Click="BtnCreateKey" Content="Create key" HorizontalAlignment="Left" Height="20" Margin="350,80,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="BtnClear" TabIndex="8" Click="BtnClearKey" Content="Clear key" HorizontalAlignment="Left" Height="20" Margin="350,160,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="BtnCopy" TabIndex="7" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="350,120,0,0" VerticalAlignment="Top" Width="90"/>
