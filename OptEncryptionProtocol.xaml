@@ -10,7 +10,7 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
         </Grid.Background>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="20" Margin="200,14,0,0" VerticalAlignment="Top" Width="80" SelectedIndex="2">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="20" Margin="200,14,0,0" VerticalAlignment="Top" Width="80" SelectedIndex="1">
             <ComboBoxItem x:Name="Key_length_8" Selected="Key_length_8_Selected" Content="8 bit"></ComboBoxItem>
             <ComboBoxItem x:Name="Key_length_16" Selected="Key_length_16_Selected" Content="16 bit"></ComboBoxItem>
             <ComboBoxItem x:Name="Key_length_32" Selected="Key_length_32_Selected" Content="32 bit"></ComboBoxItem>

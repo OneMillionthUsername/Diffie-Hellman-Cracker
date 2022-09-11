@@ -1,4 +1,11 @@
-﻿In der Kryptographie sind vor allem jene Zahlen n von Interesse, für die alle Zahlen zwischen 1 und n − 1 ein inverses Element
+﻿//DISKRETE EXPONENTIALFUNKTION
+Die diskrete Exponentialfunktion liefert den Rest von b^x mod n;
+
+//DISKRETER LOGARITHMUS
+Ist die Umkehrfunktion der diskreten Exponentialfunktion.
+
+
+In der Kryptographie sind vor allem jene Zahlen n von Interesse, für die alle Zahlen zwischen 1 und n − 1 ein inverses Element
 modulo n haben. Dies ist genau dann der Fall, wenn n eine Primzahl ist (weshalb man p statt n schreibt). Die Zahlen zwischen 1
 und p − 1 bilden also zusammen mit der Modulo-Multiplikation die Gruppe Z p ∗ Eine weitere Aussage, die sich beweisen lässt:
 Nimmt man ein beliebiges Element a aus Z p ∗ und betrachtet die Menge { a , a 2 , a 3 , . . . , a p − 1 ( mod   p ), 
