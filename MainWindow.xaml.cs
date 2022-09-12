@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Diffie_Hellman_Crack {
@@ -13,7 +14,7 @@ namespace Diffie_Hellman_Crack {
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window {
-		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(8);
+		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
 		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(8);
 		#region DECLARATION
 		public delegate bool CheckInput();
