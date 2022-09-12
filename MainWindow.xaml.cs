@@ -101,6 +101,7 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e) {
+			ProgressBar.IsIndeterminate = true;
 			CheckInput checkInput = SetValues;
 			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
@@ -154,6 +155,7 @@ namespace Diffie_Hellman_Crack {
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
+			ProgressBar.IsIndeterminate = false;
 		}
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input
