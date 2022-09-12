@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -100,7 +101,7 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.gmp_randclear(rnd);
 			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
-		private void BtnCrackKey(object sender, RoutedEventArgs e) {
+		private async void BtnCrackKey(object sender, RoutedEventArgs e) {
 			CheckInput checkInput = SetValues;
 			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
@@ -116,42 +117,44 @@ namespace Diffie_Hellman_Crack {
 			Versuche = 0;
 			//exponent = 1;
 			stopwatch.Start();
+			ProgressBar.IsIndeterminate = true;
 
 			//EXPONENT RESETEN und auf 1 setzen
 			gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_add_ui(exponent, exponent, 1);
+			await Task.Run(() => {
+				while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
+					Versuche++;
+					//exponent++;
+					gmp_lib.mpz_add_ui(exponent, exponent, 1);
 
-			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
-				Versuche++;
-				//exponent++;
-				gmp_lib.mpz_add_ui(exponent, exponent, 1);
+					gmp_lib.mpz_powm(result, basis, exponent, group);
 
-				gmp_lib.mpz_powm(result, basis, exponent, group);
-
-				if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0) {
-					//exponent wird größer als uint
-					gmp_lib.mpz_init_set(secretKeyAlice, exponent);
-					i++;
+					if (gmp_lib.mpz_cmp(result, ExchangeKeyAlice) == 0) {
+						//exponent wird größer als uint
+						gmp_lib.mpz_init_set(secretKeyAlice, exponent);
+						i++;
+					}
+					if (gmp_lib.mpz_cmp(result, ExchangeKeyBob) == 0) {
+						gmp_lib.mpz_init_set(secretKeyBob, exponent);
+						i++;
+					}
+					if (i >= 2) {
+						break;
+					}
 				}
-				if (gmp_lib.mpz_cmp(result, ExchangeKeyBob) == 0) {
-					gmp_lib.mpz_init_set(secretKeyBob, exponent);
-					i++;
-				}
-				if (i >= 2) {
-					break;
-				}
-			}
+			});
 			gmp_lib.mpz_powm(sharedSecretKeyAlice, ExchangeKeyBob, secretKeyAlice, group);
 			gmp_lib.mpz_powm(sharedSecretKeyBob, ExchangeKeyAlice, secretKeyBob, group);
-
-			stopwatch.Stop();
-			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-			stopwatch.Reset();
 
 			ausgabeTopR.Text = secretKeyAlice.ToString();
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
+			ProgressBar.IsIndeterminate = false;
+			stopwatch.Stop();
+			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+			stopwatch.Reset();
 		}
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input
