@@ -101,7 +101,6 @@ namespace Diffie_Hellman_Crack {
 			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
 		}
 		private void BtnCrackKey(object sender, RoutedEventArgs e) {
-			ProgressBar.IsIndeterminate = true;
 			CheckInput checkInput = SetValues;
 			checkInput += CheckInputSyntax;
 			checkInput += CheckInputPrime;
@@ -121,7 +120,6 @@ namespace Diffie_Hellman_Crack {
 			//EXPONENT RESETEN und auf 1 setzen
 			gmp_lib.mpz_init(exponent);
 			gmp_lib.mpz_add_ui(exponent, exponent, 1);
-			ProgressBar.IsIndeterminate = true;
 
 			while (gmp_lib.mpz_cmp(group, exponent) >= 0) {
 				Versuche++;
@@ -148,14 +146,12 @@ namespace Diffie_Hellman_Crack {
 
 			stopwatch.Stop();
 			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-			ProgressBar.IsIndeterminate = false;
 			stopwatch.Reset();
 
 			ausgabeTopR.Text = secretKeyAlice.ToString();
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
-			ProgressBar.IsIndeterminate = false;
 		}
 		private bool SetValues() {
 			//bevorzuge immer Wert aus input
