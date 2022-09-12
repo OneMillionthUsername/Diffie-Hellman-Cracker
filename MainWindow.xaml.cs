@@ -16,6 +16,7 @@ namespace Diffie_Hellman_Crack {
 	public partial class MainWindow : Window {
 		public static mp_bitcnt_t BitStandard { get; set; } = new mp_bitcnt_t(32);
 		public static mp_bitcnt_t BitStandardPrime { get; set; } = new mp_bitcnt_t(8);
+		public string Crackzeit { get; set; }
 		#region DECLARATION
 		public delegate bool CheckInput();
 		readonly List<TextBox> inputBoxes = new List<TextBox>();
@@ -152,9 +153,11 @@ namespace Diffie_Hellman_Crack {
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
+			//Application.Current.Dispatcher.Invoke(() => { ZeitAusgabe.Text = zeit; });
 			ProgressBar.IsIndeterminate = false;
 			stopwatch.Stop();
-			ZeitAusgabe.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+			Crackzeit = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+			ZeitAusgabe.Text = Crackzeit;
 			stopwatch.Reset();
 		}
 		private bool SetValues() {
