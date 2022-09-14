@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using WpfApp1;
+using Newtonsoft.Json;
 
 namespace Diffie_Hellman_Crack {
 	/// <summary>
@@ -39,7 +42,7 @@ namespace Diffie_Hellman_Crack {
 		private readonly mpz_t secretKeyBob = new mpz_t();
 		private readonly mpz_t secretKeyAlice = new mpz_t();
 		private readonly mpz_t result = new mpz_t();
-		private readonly Stopwatch stopwatch = new Stopwatch(); 
+		private readonly Stopwatch stopwatch = new Stopwatch();
 		#endregion
 		public MainWindow() {
 			InitializeComponent();
@@ -94,11 +97,6 @@ namespace Diffie_Hellman_Crack {
 			#endregion
 		}
 
-		//async checken wann das Literal legal ist.
-		//private async Task CheckInputInRealTime() {
-		//	MainWindow mainWindow = await CheckInputSyntax();
-		//}
-
 		~MainWindow() {
 			gmp_lib.gmp_randclear(rnd);
 			gmp_lib.mpz_clears(group, basis, alicePrivate, bobPrivate, sharedSecretKeyAlice, sharedSecretKeyBob, ExchangeKeyAlice, ExchangeKeyBob, secretKeyBob, secretKeyAlice, result);
@@ -115,6 +113,7 @@ namespace Diffie_Hellman_Crack {
 					return;
 				}
 			}
+
 			int i = 0;
 			Versuche = 0;
 			//exponent = 1;
@@ -153,7 +152,6 @@ namespace Diffie_Hellman_Crack {
 			ausgabeTop1R.Text = secretKeyBob.ToString();
 			ausgabeBottomR.Text = sharedSecretKeyAlice.ToString();
 			ausgabeBottomR1.Text = Versuche.ToString();
-			//Application.Current.Dispatcher.Invoke(() => { ZeitAusgabe.Text = zeit; });
 			ProgressBar.IsIndeterminate = false;
 			stopwatch.Stop();
 			Crackzeit = stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -269,6 +267,32 @@ namespace Diffie_Hellman_Crack {
 		}
 		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
 
+			Testkey tk = new Testkey(group, basis, ExchangeKeyAlice, ExchangeKeyBob, bobPrivate, alicePrivate, secretKeyBob, secretKeyAlice);
+			//string path = Directory.GetCurrentDirectory();
+			//if (!File.Exists(Path.Combine(path, tk.SecretAlice.ToString()))) {
+			//	FileStream fs = File.Create(Path.Combine(path, tk.SecretAlice.ToString()));
+			//	fs.Close();
+			string json = JsonConvert.SerializeObject(tk);
+			string deserialize = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Testkeys.json"));
+			if (json == deserialize) {
+				tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
+				generateAlicePrivate.Text = tk.PrivateAlice.ToString();
+				generateBobPrivate.Text = tk.PrivateBob.ToString();
+				generateExchangeKeyAinput.Text = tk.ExchangeAlice.ToString();
+				generateExchangeKeyBinput.Text = tk.ExchangeBob.ToString();
+				sharedSecretKeyAliceBox.Text = tk.SecretAlice.ToString();
+				sharedSecretKeyBobBox.Text = tk.SecretBob.ToString();
+				generatePublicKeyAinput.Text = tk.G.ToString();
+				generatePublicKeyBinput.Text = tk.n.ToString();
+			}
+			else {
+				using (StreamWriter stream = new StreamWriter("Testkeys.json")) {
+					stream.WriteLine(json);
+					stream.Flush();
+					stream.Close();
+				}
+			}
 		}
 	}
 }
+
