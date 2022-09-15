@@ -267,7 +267,16 @@ namespace Diffie_Hellman_Crack {
 		}
 		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
 
-			Testkey tk = new Testkey(group, basis, ExchangeKeyAlice, ExchangeKeyBob, bobPrivate, alicePrivate, secretKeyBob, secretKeyAlice);
+			Testkey tk = new Testkey(
+				generatePublicKeyAinput.Text,
+				generatePublicKeyBinput.Text,
+				generateExchangeKeyAinput.Text,
+				generateExchangeKeyBinput.Text,
+				generateBobPrivate.Text,
+				generateAlicePrivate.Text,
+				sharedSecretKeyBobBox.Text,
+				sharedSecretKeyAliceBox.Text
+				);
 			//string path = Directory.GetCurrentDirectory();
 			//if (!File.Exists(Path.Combine(path, tk.SecretAlice.ToString()))) {
 			//	FileStream fs = File.Create(Path.Combine(path, tk.SecretAlice.ToString()));

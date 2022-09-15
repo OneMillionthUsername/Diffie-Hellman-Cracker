@@ -1,31 +1,33 @@
-﻿using Math.Gmp.Native;
+﻿using Diffie_Hellman_Crack;
+using Math.Gmp.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace WpfApp1 {
 	class Testkey {
-		public Testkey(mpz_t g, mpz_t n, mpz_t exchangeAlice, mpz_t exchangeBob, mpz_t privateBob, mpz_t privateAlice, mpz_t secretBob, mpz_t secretAlice) {
-			G = g;
-			this.n = n;
-			ExchangeAlice = exchangeAlice;
-			ExchangeBob = exchangeBob;
-			PrivateBob = privateBob;
-			PrivateAlice = privateAlice;
-			SecretBob = secretBob;
-			SecretAlice = secretAlice;
+		public Testkey(params string[] ps) {
+			G = ps[0];
+			this.n = ps[1];
+			ExchangeAlice = ps[2];
+			ExchangeBob = ps[3];
+			PrivateBob = ps[4];
+			PrivateAlice = ps[5];
+			SecretBob = ps[6];
+			SecretAlice = ps[7];
 		}
 
-		public mpz_t G { get; set; }
-		public mpz_t n { get; set; }
-		public mpz_t ExchangeAlice { get; set; }
-		public mpz_t ExchangeBob { get; set; }
-		public mpz_t PrivateBob { get; set; }
-		public mpz_t PrivateAlice { get; set; }
-		public mpz_t SecretBob { get; set; }
-		public mpz_t SecretAlice { get; set; }
+		public string G { get; set; }
+		public string n { get; set; }
+		public string ExchangeAlice { get; set; }
+		public string ExchangeBob { get; set; }
+		public string PrivateBob { get; set; }
+		public string PrivateAlice { get; set; }
+		public string SecretBob { get; set; }
+		public string SecretAlice { get; set; }
 
 	}
 }
