@@ -9,15 +9,15 @@ using System.Windows.Controls;
 
 namespace WpfApp1 {
 	class Testkey {
-		public Testkey(params string[] ps) {
-			G = ps[0];
-			this.n = ps[1];
-			ExchangeAlice = ps[2];
-			ExchangeBob = ps[3];
-			PrivateBob = ps[4];
-			PrivateAlice = ps[5];
-			SecretBob = ps[6];
-			SecretAlice = ps[7];
+		public Testkey(string g, string n, string exchangeAlice, string exchangeBob, string privateBob, string privateAlice, string secretBob, string secretAlice) {
+			G = g;
+			this.n = n;
+			ExchangeAlice = exchangeAlice;
+			ExchangeBob = exchangeBob;
+			PrivateBob = privateBob;
+			PrivateAlice = privateAlice;
+			SecretBob = secretBob;
+			SecretAlice = secretAlice;
 		}
 
 		public string G { get; set; }
@@ -28,6 +28,5 @@ namespace WpfApp1 {
 		public string PrivateAlice { get; set; }
 		public string SecretBob { get; set; }
 		public string SecretAlice { get; set; }
-
 	}
 }

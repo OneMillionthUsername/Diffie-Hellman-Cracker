@@ -261,47 +261,53 @@ namespace Diffie_Hellman_Crack {
 
 			result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
 		}
+		private void InfoMessageBox(string errMessage, string errCaption) {
+			string messageBoxText = errMessage;
+			string caption = errCaption;
+			MessageBoxButton button = MessageBoxButton.OK;
+			MessageBoxImage icon = MessageBoxImage.Information;
+			MessageBoxResult result;
+
+			result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+		}
 		private void OptEncProtocol_Click(object sender, RoutedEventArgs e) {
 			OptEncryptionProtocol opt = new OptEncryptionProtocol();
 			opt.Show();
 		}
 		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
+			string path = Directory.GetCurrentDirectory();
+			if (!File.Exists(Path.Combine(path, generateAlicePrivate.Text + ".json"))) {
+				FileStream fs = File.Create(Path.Combine(path, generateAlicePrivate.Text + ".json"));
 
-			Testkey tk = new Testkey(
-				generatePublicKeyAinput.Text,
-				generatePublicKeyBinput.Text,
-				generateExchangeKeyAinput.Text,
-				generateExchangeKeyBinput.Text,
-				generateBobPrivate.Text,
-				generateAlicePrivate.Text,
-				sharedSecretKeyBobBox.Text,
-				sharedSecretKeyAliceBox.Text
-				);
-			//string path = Directory.GetCurrentDirectory();
-			//if (!File.Exists(Path.Combine(path, tk.SecretAlice.ToString()))) {
-			//	FileStream fs = File.Create(Path.Combine(path, tk.SecretAlice.ToString()));
-			//	fs.Close();
-			string json = JsonConvert.SerializeObject(tk);
-			string deserialize = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Testkeys.json"));
-			if (json == deserialize) {
-				tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
-				generateAlicePrivate.Text = tk.PrivateAlice.ToString();
-				generateBobPrivate.Text = tk.PrivateBob.ToString();
-				generateExchangeKeyAinput.Text = tk.ExchangeAlice.ToString();
-				generateExchangeKeyBinput.Text = tk.ExchangeBob.ToString();
-				sharedSecretKeyAliceBox.Text = tk.SecretAlice.ToString();
-				sharedSecretKeyBobBox.Text = tk.SecretBob.ToString();
-				generatePublicKeyAinput.Text = tk.G.ToString();
-				generatePublicKeyBinput.Text = tk.n.ToString();
+				Testkey tk = new Testkey(
+					generatePublicKeyAinput.Text,
+					generatePublicKeyBinput.Text,
+					generateExchangeKeyAinput.Text,
+					generateExchangeKeyBinput.Text,
+					generateBobPrivate.Text,
+					generateAlicePrivate.Text,
+					sharedSecretKeyBobBox.Text,
+					sharedSecretKeyAliceBox.Text
+					);
+				string json = JsonConvert.SerializeObject(tk);
+				fs.Flush();
+				fs.Close();
+				File.WriteAllText(Path.Combine(path, generateAlicePrivate.Text + ".json"), json);
+				InfoMessageBox("File created", "File creation");
 			}
 			else {
-				using (StreamWriter stream = new StreamWriter("Testkeys.json")) {
-					stream.WriteLine(json);
-					stream.Flush();
-					stream.Close();
-				}
+				string deserialize = File.ReadAllText(Path.Combine(path, generateAlicePrivate.Text + ".json"));
+				Testkey tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
+				generateAlicePrivate.Text = tk.PrivateAlice;
+				generateBobPrivate.Text = tk.PrivateBob;
+				generateExchangeKeyAinput.Text = tk.ExchangeAlice;
+				generateExchangeKeyBinput.Text = tk.ExchangeBob;
+				sharedSecretKeyAliceBox.Text = tk.SecretAlice;
+				sharedSecretKeyBobBox.Text = tk.SecretBob;
+				generatePublicKeyAinput.Text = tk.G;
+				generatePublicKeyBinput.Text = tk.n;
+				InfoMessageBox("Data imported", "Data import");
 			}
 		}
 	}
 }
-
