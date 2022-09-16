@@ -22,7 +22,7 @@ namespace WpfApp1 {
 		}
 
 		private void fileNames_Selected(object sender, RoutedEventArgs e) {
-
+			//set values to selected row
 		}
 	}
 

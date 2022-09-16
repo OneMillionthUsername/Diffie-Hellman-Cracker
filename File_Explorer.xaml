@@ -8,6 +8,6 @@
         Title="File Explorer" Height="450" Width="800">
     <Grid>
         <Label x:Name="labelFiles" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 10,0,0" Content="Files" Width="100" Height="30"></Label>
-        <DataGrid Name="fileNames" DataGridRow.Selected="fileNames_Selected" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,10,0,0"></DataGrid>
+        <DataGrid Name="fileNames"  DataGridRow.Selected="fileNames_Selected" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,10,0,0" HeadersVisibility="Column" IsReadOnly="True"/>
     </Grid>
 </Window>
