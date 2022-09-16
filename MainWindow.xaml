@@ -12,8 +12,8 @@
         <DockPanel Margin="0, 0, 0, 0" d:IsLocked="True">
             <Menu DockPanel.Dock="Left" FlowDirection="LeftToRight">
                 <MenuItem Header="_File" HorizontalAlignment="Left" FlowDirection="RightToLeft">
-                    <MenuItem Header="Write to File" Click="OptFileOpen_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
-                    <MenuItem Header="Read from File" Click="OptFileOpen_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
+                    <MenuItem Header="Write to File" Click="OptFileOpenWrite_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
+                    <MenuItem Header="Read from File" Click="OptFileOpenRead_Click" HorizontalAlignment="Left" FlowDirection="RightToLeft"/>
                 </MenuItem>
                 <MenuItem Header="_Options" HorizontalAlignment="Left" VerticalContentAlignment="Top" FlowDirection="RightToLeft">
                     <MenuItem Header="_Encryption protocol" Click="OptEncProtocol_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="RightToLeft"/>

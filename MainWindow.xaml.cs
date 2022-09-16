@@ -274,8 +274,13 @@ namespace Diffie_Hellman_Crack {
 			OptEncryptionProtocol opt = new OptEncryptionProtocol();
 			opt.Show();
 		}
-		private void OptFileOpen_Click(object sender, RoutedEventArgs e) {
+		private void OptFileOpenWrite_Click(object sender, RoutedEventArgs e) {
 			string path = Directory.GetCurrentDirectory();
+			if (!Directory.Exists(Path.Combine(path, "Json"))) {
+				_ = Directory.CreateDirectory(Path.Combine(path, "Json"));
+			}
+			path = Path.Combine(path, "Json");
+
 			if (!File.Exists(Path.Combine(path, generateAlicePrivate.Text + ".json"))) {
 				FileStream fs = File.Create(Path.Combine(path, generateAlicePrivate.Text + ".json"));
 
@@ -296,18 +301,25 @@ namespace Diffie_Hellman_Crack {
 				InfoMessageBox("File created", "File creation");
 			}
 			else {
-				string deserialize = File.ReadAllText(Path.Combine(path, generateAlicePrivate.Text + ".json"));
-				Testkey tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
-				generateAlicePrivate.Text = tk.PrivateAlice;
-				generateBobPrivate.Text = tk.PrivateBob;
-				generateExchangeKeyAinput.Text = tk.ExchangeAlice;
-				generateExchangeKeyBinput.Text = tk.ExchangeBob;
-				sharedSecretKeyAliceBox.Text = tk.SecretAlice;
-				sharedSecretKeyBobBox.Text = tk.SecretBob;
-				generatePublicKeyAinput.Text = tk.G;
-				generatePublicKeyBinput.Text = tk.n;
-				InfoMessageBox("Data imported", "Data import");
+				ErrorMessageBox("File exists!", "File creation error");
 			}
+		}
+		private void OptFileOpenRead_Click(object sender, RoutedEventArgs e) {
+
+			string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
+			string[] files = Directory.GetFiles(path);
+
+			string deserialize = File.ReadAllText(Path.Combine(path, generateAlicePrivate.Text + ".json"));
+			Testkey tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
+			generateAlicePrivate.Text = tk.PrivateAlice;
+			generateBobPrivate.Text = tk.PrivateBob;
+			generateExchangeKeyAinput.Text = tk.ExchangeAlice;
+			generateExchangeKeyBinput.Text = tk.ExchangeBob;
+			sharedSecretKeyAliceBox.Text = tk.SecretAlice;
+			sharedSecretKeyBobBox.Text = tk.SecretBob;
+			generatePublicKeyAinput.Text = tk.G;
+			generatePublicKeyBinput.Text = tk.n;
+			InfoMessageBox("Data imported", "Data import");
 		}
 	}
 }
