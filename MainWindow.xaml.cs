@@ -95,6 +95,7 @@ namespace Diffie_Hellman_Crack {
 			allBoxes.Add(sharedSecretKeyBobBox);
 			allBoxes.Add(ZeitAusgabe);
 			#endregion
+
 		}
 
 		~MainWindow() {

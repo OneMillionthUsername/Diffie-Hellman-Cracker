@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IExchangeValues.cs" />
     <Compile Include="Testkey.cs" />
     <Compile Include="File_Explorer.xaml.cs">
       <DependentUpon>File_Explorer.xaml</DependentUpon>
