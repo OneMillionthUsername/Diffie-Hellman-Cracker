@@ -285,7 +285,7 @@ namespace Diffie_Hellman_Crack {
 			if (!File.Exists(Path.Combine(path, generateAlicePrivate.Text + ".json"))) {
 				FileStream fs = File.Create(Path.Combine(path, generateAlicePrivate.Text + ".json"));
 
-				Testkey tk = new Testkey(
+				Key tk = new Key(
 					generatePublicKeyAinput.Text,
 					generatePublicKeyBinput.Text,
 					generateExchangeKeyAinput.Text,
@@ -312,10 +312,10 @@ namespace Diffie_Hellman_Crack {
 			string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
 			string[] files = Directory.GetFiles(path);
 
-			List<Testkey> testkeys = new List<Testkey>();
+			List<Key> testkeys = new List<Key>();
 			for (int i = 0; i < files.Length; i++) {
 				string deserialize = File.ReadAllText(files[i]);
-				Testkey item = JsonConvert.DeserializeObject<Testkey>(deserialize);
+				Key item = JsonConvert.DeserializeObject<Key>(deserialize);
 				testkeys.Add(item);
 			}
 			fe.fileNames.ItemsSource = testkeys;

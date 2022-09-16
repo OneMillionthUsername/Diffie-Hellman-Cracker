@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace WpfApp1 {
-	class Testkey : IExchangeValues {
-		public Testkey(string g, string n, string exchangeAlice, string exchangeBob, string privateBob, string privateAlice, string secretBob, string secretAlice) {
+	class Key : IExchangeValues {
+		public Key(string g, string n, string exchangeAlice, string exchangeBob, string privateBob, string privateAlice, string secretBob, string secretAlice) {
 			G = g;
 			this.n = n;
 			ExchangeAlice = exchangeAlice;

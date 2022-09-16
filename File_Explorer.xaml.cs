@@ -37,13 +37,13 @@ namespace WpfApp1 {
 		}
 
 		private void Double_Click(object sender, MouseButtonEventArgs e) {
-			for (int i = 0; i < fileNames.Columns.Count; i++) {
-				DataGridCellInfo dataGridCellInfo = new DataGridCellInfo();
+			for (int i = 0; i < fileNames.SelectedItems.Count; i++) {
+				if (fileNames.SelectedItems.Contains(fileNames.) {
 
-				string deserialize = DataGrid.CurrentItemProperty.ToString();
-				Testkey item = JsonConvert.DeserializeObject<Testkey>(deserialize);
-
+				} 
 			}
+			string deserialize = "";
+			Key item = JsonConvert.DeserializeObject<Key>(deserialize);
 		}
 
 		public void SetValues() {
