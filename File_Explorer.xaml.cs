@@ -14,42 +14,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfApp1 {
+namespace Diffie_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für Window1.xaml
 	/// </summary>
 	public partial class File_Explorer : Window, IExchangeValues {
-		public string G { get; set; }
-		public string n { get; set; }
-		public string ExchangeAlice { get; set; }
-		public string ExchangeBob { get; set; }
-		public string PrivateBob { get; set; }
-		public string PrivateAlice { get; set; }
-		public string SecretBob { get; set; }
-		public string SecretAlice { get; set; }
+		public string InterfaceG { get; set; }
+		public string InterfaceN { get; set; }
+		public string InterfaceExchangeAlice { get; set; }
+		public string InterfaceExchangeBob { get; set; }
+		public string InterfacePrivateBob { get; set; }
+		public string InterfacePrivateAlice { get; set; }
+		public string InterfaceSecretBob { get; set; }
+		public string InterfaceSecretAlice { get; set; }
 
 		public File_Explorer() {
 			InitializeComponent();
 		}
-
-		private void FileNames_Selected(object sender, RoutedEventArgs e) {
-			//set values to selected row
-		}
-
-		private void Double_Click(object sender, MouseButtonEventArgs e) {
-			for (int i = 0; i < fileNames.SelectedItems.Count; i++) {
-				if (fileNames.SelectedItems.Contains(fileNames.) {
-
-				} 
-			}
-			string deserialize = "";
-			Key item = JsonConvert.DeserializeObject<Key>(deserialize);
-		}
-
 		public void SetValues() {
 			throw new NotImplementedException();
 		}
-
 		public void GetValues() {
 			throw new NotImplementedException();
 		}

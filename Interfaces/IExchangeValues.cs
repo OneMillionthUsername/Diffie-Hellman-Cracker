@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Diffie_Hellman_Cracker.Interfaces {
 	interface IExchangeValues {
-		string G { get; set; }
-		string n { get; set; }
-		string ExchangeAlice { get; set; }
-		string ExchangeBob { get; set; }
-		string PrivateBob { get; set; }
-		string PrivateAlice { get; set; }
-		string SecretBob { get; set; }
-		string SecretAlice { get; set; }
+		string InterfaceG { get; set; }
+		string InterfaceN { get; set; }
+		string InterfaceExchangeAlice { get; set; }
+		string InterfaceExchangeBob { get; set; }
+		string InterfacePrivateBob { get; set; }
+		string InterfacePrivateAlice { get; set; }
+		string InterfaceSecretBob { get; set; }
+		string InterfaceSecretAlice { get; set; }
 		void SetValues();
 		void GetValues();
 	}

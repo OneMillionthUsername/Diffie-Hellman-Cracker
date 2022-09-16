@@ -18,7 +18,6 @@ namespace Diffie_Hellman_Crack {
 	/// Interaktionslogik für OptEncryptionProtocol.xaml
 	/// </summary>
 	public partial class OptEncryptionProtocol : Window {
-		
 		public OptEncryptionProtocol() {
 			InitializeComponent();
 		}

@@ -23,7 +23,7 @@
         <!--#endregion-->
 
         <!--#region Bilder -->
-        <Image x:Name="key" Source="C:\Users\deanm\Desktop\key_wo_bg.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,191,0,0" Width="20"/>
+        <Image x:Name="key_img" Source="C:\Users\deanm\Desktop\key_wo_bg.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,191,0,0" Width="20"/>
         <Image x:Name="clock" Source="C:\Users\deanm\Desktop\clock_wo_bg.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="615,9,0,0" Width="20"/>
         <!--#endregion-->
 
