@@ -305,21 +305,20 @@ namespace Diffie_Hellman_Crack {
 			}
 		}
 		private void OptFileOpenRead_Click(object sender, RoutedEventArgs e) {
+			File_Explorer fe = new File_Explorer();
+			fe.Show();
 
 			string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
 			string[] files = Directory.GetFiles(path);
 
-			string deserialize = File.ReadAllText(Path.Combine(path, generateAlicePrivate.Text + ".json"));
-			Testkey tk = JsonConvert.DeserializeObject<Testkey>(deserialize);
-			generateAlicePrivate.Text = tk.PrivateAlice;
-			generateBobPrivate.Text = tk.PrivateBob;
-			generateExchangeKeyAinput.Text = tk.ExchangeAlice;
-			generateExchangeKeyBinput.Text = tk.ExchangeBob;
-			sharedSecretKeyAliceBox.Text = tk.SecretAlice;
-			sharedSecretKeyBobBox.Text = tk.SecretBob;
-			generatePublicKeyAinput.Text = tk.G;
-			generatePublicKeyBinput.Text = tk.n;
-			InfoMessageBox("Data imported", "Data import");
+			List<Testkey> testkeys = new List<Testkey>();
+			for (int i = 0; i < files.Length; i++) {
+				string deserialize = File.ReadAllText(files[i]);
+				Testkey item = JsonConvert.DeserializeObject<Testkey>(deserialize);
+				testkeys.Add(item);
+			}
+			fe.fileNames.ItemsSource = testkeys;
+			//InfoMessageBox("Data imported", "Data import");
 		}
 	}
 }

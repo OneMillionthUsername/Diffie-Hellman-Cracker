@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="File Explorer" Height="450" Width="800">
     <Grid>
-        <Label x:Name="labelFiles" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100, 100,0,0" Content="Files" Width="100" Height="30"></Label>
-        <ComboBox x:Name="comboBox" Height="30" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,100,0,0"></ComboBox>
-        
+        <Label x:Name="labelFiles" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 10,0,0" Content="Files" Width="100" Height="30"></Label>
+        <DataGrid Name="fileNames" DataGridRow.Selected="fileNames_Selected" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,10,0,0"></DataGrid>
     </Grid>
 </Window>

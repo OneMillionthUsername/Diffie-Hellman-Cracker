@@ -20,5 +20,10 @@ namespace WpfApp1 {
 		public File_Explorer() {
 			InitializeComponent();
 		}
+
+		private void fileNames_Selected(object sender, RoutedEventArgs e) {
+
+		}
 	}
+
 }
