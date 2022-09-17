@@ -13,10 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Diffie_Hellman_Cracker;
-using Diffie_Hellman_Crack;
 
-namespace WpfApp1 {
+namespace Diffie_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für Window1.xaml
 	/// </summary>

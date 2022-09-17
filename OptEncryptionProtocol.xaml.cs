@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Diffie_Hellman_Crack {
+namespace Diffie_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für OptEncryptionProtocol.xaml
 	/// </summary>

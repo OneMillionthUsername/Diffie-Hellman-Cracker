@@ -1,5 +1,4 @@
-﻿using Diffie_Hellman_Crack;
-using Math.Gmp.Native;
+﻿using Math.Gmp.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace WpfApp1 {
+namespace Diffie_Hellman_Cracker {
 	class Key {
 		#region PROPs
 		public string G { get; set; }

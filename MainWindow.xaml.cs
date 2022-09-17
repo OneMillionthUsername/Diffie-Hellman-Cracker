@@ -9,11 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using WpfApp1;
 using Newtonsoft.Json;
-using Diffie_Hellman_Crack;
 
-namespace Diffie_Hellman_Crack {
+namespace Diffie_Hellman_Cracker {
 	/// <summary>
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>

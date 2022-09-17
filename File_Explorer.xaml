@@ -1,9 +1,9 @@
-﻿<Window x:Class="WpfApp1.File_Explorer"
+﻿<Window x:Class="Diffie_Hellman_Cracker.File_Explorer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:Diffie_Hellman_Cracker"
         mc:Ignorable="d"
         Title="File Explorer" Height="450" Width="800">
     <Grid>
