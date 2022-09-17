@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Diffie_Hellman_Crack"
         mc:Ignorable="d"
         Title="Diffie-Hellman-Cracker" Height="450" Width="800">
-
-    <Grid Background="AliceBlue">
+    <StackPanel Margin="15">
+        <Grid Background="AliceBlue">
         <!--#region MENU -->
         <DockPanel Margin="0, 0, 0, 0" d:IsLocked="True">
             <Menu DockPanel.Dock="Left" FlowDirection="LeftToRight">
@@ -27,7 +27,7 @@
         <Image x:Name="clock" Source="C:\Users\deanm\Desktop\clock_wo_bg.png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="615,9,0,0" Width="20"/>
         <!--#endregion-->
 
-        <!--#region Namen links -->
+        <!--#region TextBlocks links -->
         <TextBlock x:Name="publicKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key group"/></TextBlock>
         <TextBlock x:Name="publicKeyB" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Public key base"/></TextBlock>
         <TextBlock x:Name="exchangeKeyA" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="60,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Alice"/></TextBlock>
@@ -38,18 +38,18 @@
         <TextBlock x:Name="exchangeKeyB_Copy" HorizontalAlignment="Left" TextAlignment="Right" Height="20" Margin="70,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.476,0.871"><Run Text="Exchange key Bob"/></TextBlock>
         <!--#endregion-->
 
-        <!--#region Input links -->
-        <TextBox x:Name="publicKeyAinput" TabIndex="1" HorizontalAlignment="Left" Height="20" Margin="190,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="publicKeyBinput" TabIndex="2" HorizontalAlignment="Left" Height="20" Margin="190,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="exchangeKeyAinput" TabIndex="3" HorizontalAlignment="Left" Height="20" Margin="190,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <TextBox x:Name="exchangeKeyBinput" TabIndex="4" HorizontalAlignment="Left" Height="20" Margin="190,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <!--#region TextBoxInput links -->
+        <TextBox x:Name="publicKeyAinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" TabIndex="1" HorizontalAlignment="Left" Height="20" Margin="190,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="publicKeyBinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" TabIndex="2" HorizontalAlignment="Left" Height="20" Margin="190,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="exchangeKeyAinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" TabIndex="3" HorizontalAlignment="Left" Height="20" Margin="190,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+        <TextBox x:Name="exchangeKeyBinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" TabIndex="4" HorizontalAlignment="Left" Height="20" Margin="190,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <!--#endregion-->
 
-        <!--#region Output links -->
-        <TextBox x:Name="generatePublicKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generatePublicKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateExchangeKeyAinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateExchangeKeyBinput" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <!--#region TextBoxOutput links -->
+        <TextBox x:Name="generatePublicKeyAinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generatePublicKeyBinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateExchangeKeyAinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
+        <TextBox x:Name="generateExchangeKeyBinput" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="190,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" AllowDrop="False" IsTabStop="False"/>
         <!--#endregion-->
 
         <!--#region Buttons -->
@@ -59,15 +59,15 @@
         <Button x:Name="BtnCopy" TabIndex="7" Click="BtnCopyClick" Content="Copy key" HorizontalAlignment="Left" Height="20" Margin="350,120,0,0" VerticalAlignment="Top" Width="90"/>
         <!--#endregion-->
 
-        <!--#region Output rechts -->
-        <TextBox x:Name="ausgabeTopR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="ausgabeTop1R" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="ausgabeBottomR" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="ausgabeBottomR1" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateAlicePrivate" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="generateBobPrivate" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="sharedSecretKeyAliceBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
-        <TextBox x:Name="sharedSecretKeyBobBox" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+        <!--#region TextBoxOutput rechts -->
+            <TextBox x:Name="ausgabeTopR" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="ausgabeTop1R" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="ausgabeBottomR" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="ausgabeBottomR1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="generateAlicePrivate" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="generateBobPrivate" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="sharedSecretKeyAliceBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
+            <TextBox x:Name="sharedSecretKeyBobBox" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Height="20" Margin="450,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Background="#FFDDDDDD" BorderBrush="Black" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <TextBox x:Name="ZeitAusgabe" Text="{Binding zeit, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="20" Margin="640,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFDDDDDD" BorderBrush="Black" IsReadOnly="True" TextAlignment="Right" AllowDrop="False" IsTabStop="False"/>
         <!--#endregion-->
 
@@ -86,4 +86,5 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="20" Margin="230,192,0,0" TextWrapping="Wrap" Text="Generated" TextAlignment="Center" VerticalAlignment="Top" Width="80"/>
         <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="20" Margin="190,9,0,0" VerticalAlignment="Top" Width="410" IsTabStop="False"/>
     </Grid>
+    </StackPanel>
 </Window>
