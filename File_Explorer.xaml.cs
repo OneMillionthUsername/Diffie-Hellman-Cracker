@@ -20,6 +20,7 @@ namespace Diffie_Hellman_Cracker {
 	/// </summary>
 	public partial class File_Explorer : Window {
 		public File_Explorer() {
+			SizeToContent = SizeToContent.WidthAndHeight;
 			InitializeComponent();
 		}
 

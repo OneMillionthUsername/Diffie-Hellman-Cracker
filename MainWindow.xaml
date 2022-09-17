@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Diffie-Hellman-Cracker" Height="450" Width="800">
 
-    <Grid Background="AliceBlue">
+    <Grid Background="AliceBlue" Margin="1">
         <!--#region MENU -->
         <DockPanel Margin="0, 0, 0, 0" d:IsLocked="True">
             <Menu DockPanel.Dock="Left" FlowDirection="LeftToRight">
