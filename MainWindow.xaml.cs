@@ -98,7 +98,6 @@ namespace Diffie_Hellman_Crack {
 			allBoxes.Add(sharedSecretKeyBobBox);
 			allBoxes.Add(ZeitAusgabe);
 			#endregion
-
 		}
 		~MainWindow() {
 			gmp_lib.gmp_randclear(rnd);
@@ -308,7 +307,6 @@ namespace Diffie_Hellman_Crack {
 		}
 		private void OptFileOpenRead_Click(object sender, RoutedEventArgs e) {
 			File_Explorer fe = new File_Explorer();
-			fe.Show();
 			string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
 			string[] files = Directory.GetFiles(path);
 			for (int i = 0; i < files.Length; i++) {
@@ -317,6 +315,7 @@ namespace Diffie_Hellman_Crack {
 				testkeys.Add(item);
 			}
 			fe.fileNames.ItemsSource = testkeys;
+			fe.Show();
 		}
 
 	}
